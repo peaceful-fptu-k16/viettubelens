@@ -1,6 +1,6 @@
 <div align="center">
 
-![VietTubeLens — Signal Prism](docs/assets/readme-hero.svg)
+![VietTubeLens — Signal Prism](docs/assets/readme-hero.svg?v=static-cards-2)
 
 # VietTubeLens
 
@@ -35,7 +35,7 @@ VietTubeLens đặt một lớp tín hiệu nhỏ ngay trên trang chủ và k�
 
 <div align="center">
 
-![Luồng tín hiệu VietTubeLens](docs/assets/readme-flow.svg)
+![Luồng tín hiệu VietTubeLens](docs/assets/readme-flow.svg?v=static-cards-2)
 
 </div>
 
@@ -43,7 +43,7 @@ VietTubeLens đặt một lớp tín hiệu nhỏ ngay trên trang chủ và k�
 
 <div align="center">
 
-![Feature constellation của VietTubeLens](docs/assets/readme-constellation.svg)
+![Feature constellation của VietTubeLens](docs/assets/readme-constellation.svg?v=static-cards-2)
 
 </div>
 
@@ -76,7 +76,7 @@ Các trạng thái `queued`, `ready`, `insufficient_data`, `unavailable`, `error
 
 <div align="center">
 
-![Ba trạng thái trung thực của VietTubeLens](docs/assets/readme-states.svg)
+![Ba trạng thái trung thực của VietTubeLens](docs/assets/readme-states.svg?v=static-cards-2)
 
 </div>
 
@@ -84,7 +84,7 @@ Các trạng thái `queued`, `ready`, `insufficient_data`, `unavailable`, `error
 
 <div align="center">
 
-![Sơ đồ kiến trúc VietTubeLens](docs/assets/readme-architecture.svg)
+![Sơ đồ kiến trúc VietTubeLens](docs/assets/readme-architecture.svg?v=static-cards-2)
 
 </div>
 
