@@ -82,24 +82,11 @@ Các trạng thái `queued`, `ready`, `insufficient_data`, `unavailable`, `error
 
 ## Kiến trúc
 
-```mermaid
-flowchart LR
-    YT[YouTube card] -->|video_id| CS[Content script]
-    CS -->|viewport queue| SW[MV3 service worker]
-    SW -->|batch ≤ 6| API[FastAPI]
-    API --> CACHE[(SQLite cache<br/>TTL 24 giờ)]
-    API --> JOB[In-process job queue]
-    JOB --> COLLECT[YouTube Comments API]
-    COLLECT --> BATCH[Adaptive micro-batcher]
-    BATCH --> SENT[ViSoBERT sentiment<br/>PyTorch]
-    BATCH --> TOX[ViSoBERT toxicity<br/>ONNX Runtime]
-    SENT --> AGG[Relevance-aware aggregation]
-    TOX --> AGG
-    AGG --> EVID[Evidence + abstention]
-    EVID --> CACHE
-    CACHE -->|polling + backoff| SW
-    SW --> BADGE[Signal Prism badge]
-```
+<div align="center">
+
+![Sơ đồ kiến trúc VietTubeLens](docs/assets/readme-architecture.svg)
+
+</div>
 
 1. Content script phát hiện card hợp lệ trong viewport và loại livestream.
 2. Service worker kiểm tra session cache rồi gửi các ID còn thiếu theo batch.

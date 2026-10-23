@@ -6,7 +6,7 @@
     <radialGradient id="halo"><stop stop-color="#7C5CFC" stop-opacity=".2"/><stop offset=".65" stop-color="#22D3EE" stop-opacity=".05"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
     <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
     <style>
-      .line{animation:dash 12s linear infinite}.node{animation:drift 5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.n2{animation-delay:-1.2s}.n3{animation-delay:-2.4s}.n4{animation-delay:-3.6s}.n5{animation-delay:-4.3s}.spin{animation:spin 16s linear infinite;transform-box:fill-box;transform-origin:center}.pulse{animation:pulse 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}@keyframes dash{to{stroke-dashoffset:-160}}@keyframes drift{50%{transform:translateY(-7px)}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes pulse{50%{transform:scale(1.08);opacity:.7}}@media(prefers-reduced-motion:reduce){.line,.node,.spin,.pulse{animation:none!important}}
+      .line{animation:dash 12s linear infinite}.spin{animation:spin 16s linear infinite;transform-box:fill-box;transform-origin:center}.pulse{animation:pulse 3s ease-in-out infinite}@keyframes dash{to{stroke-dashoffset:-160}}@keyframes spin{to{transform:rotate(360deg)}}@keyframes pulse{50%{opacity:.68}}@media(prefers-reduced-motion:reduce){.line,.spin,.pulse{animation:none!important}}
     </style>
   </defs>
   <rect width="1200" height="480" rx="28" fill="url(#bg)"/><rect x="1" y="1" width="1198" height="478" rx="27" fill="none" stroke="#263350"/>
