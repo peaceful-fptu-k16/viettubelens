@@ -33,7 +33,19 @@ VietTubeLens đặt một lớp tín hiệu nhỏ ngay trên trang chủ và k�
 - Thấy rõ độ tin cậy, cỡ mẫu và lý do hệ thống từ chối kết luận.
 - Khám phá góc nhìn thiểu số khi cộng đồng có dấu hiệu phân cực.
 
+<div align="center">
+
+![Luồng tín hiệu VietTubeLens](docs/assets/readme-flow.svg)
+
+</div>
+
 ## Điểm nổi bật
+
+<div align="center">
+
+![Feature constellation của VietTubeLens](docs/assets/readme-constellation.svg)
+
+</div>
 
 | Khả năng | Cách hoạt động |
 |---|---|
@@ -61,6 +73,12 @@ Signal Prism là ngôn ngữ nhận diện riêng của VietTubeLens:
 Badge mở rộng khi hover hoặc focus. Click sẽ mở popover tại chỗ với phân bố cảm xúc, toxicity, cỡ mẫu, confidence, evidence và trạng thái cache. Khi một popover mở, các badge khác được ẩn tạm thời để không che nội dung.
 
 Các trạng thái `queued`, `ready`, `insufficient_data`, `unavailable`, `error` và skeleton loading có cách thể hiện riêng. Kết quả hoàn thành có prism sweep một lần; giao diện không phát hiệu ứng liên tục gây xao nhãng.
+
+<div align="center">
+
+![Ba trạng thái trung thực của VietTubeLens](docs/assets/readme-states.svg)
+
+</div>
 
 ## Kiến trúc
 
