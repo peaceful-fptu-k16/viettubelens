@@ -1,0 +1,10 @@
+{
+  "name": "viettubelens",
+  "private": true,
+  "workspaces": ["apps/extension"],
+  "scripts": {
+    "build": "npm run build -w @viettubelens/extension",
+    "test": "npm run test -w @viettubelens/extension",
+    "typecheck": "npm run typecheck -w @viettubelens/extension"
+  }
+}

@@ -1,0 +1,242 @@
+import asyncio
+import logging
+import math
+import threading
+from importlib import import_module
+from typing import Any
+
+from .analyzer import CommentScore, ReactionAnalyzer
+from .config import Settings
+from .schemas import AnalysisResult, Comment, DataSource
+
+logger = logging.getLogger(__name__)
+
+
+class PretrainedModelService:
+    """Lazy, batched inference over two Vietnamese social-language checkpoints."""
+
+    def __init__(self, settings: Settings, fallback: ReactionAnalyzer) -> None:
+        self.settings = settings
+        self.fallback = fallback
+        self.state = "disabled" if not settings.use_pretrained_models else "lazy"
+        self.device = "not-loaded"
+        self._torch: Any = None
+        self._sentiment_tokenizer: Any = None
+        self._sentiment_model: Any = None
+        self._toxicity_tokenizer: Any = None
+        self._toxicity_session: Any = None
+        self._load_error: str | None = None
+        self._load_lock = threading.Lock()
+
+    async def warmup(self) -> None:
+        if not self.settings.use_pretrained_models or self.state in {"ready", "fallback"}:
+            return
+        try:
+            await asyncio.to_thread(self._ensure_loaded)
+        except Exception as error:
+            self.state = "fallback"
+            self._load_error = type(error).__name__
+            logger.warning(
+                "Model warm-up failed (%s); fallback remains available", self._load_error
+            )
+
+    async def analyze(
+        self, video_id: str, comments: list[Comment], source: DataSource
+    ) -> AnalysisResult:
+        results = await self.analyze_many([(video_id, comments, source)])
+        return results[0]
+
+    async def analyze_many(
+        self, items: list[tuple[str, list[Comment], DataSource]]
+    ) -> list[AnalysisResult]:
+        if not self.settings.use_pretrained_models:
+            return [
+                self.fallback.analyze(video_id, comments, source)
+                for video_id, comments, source in items
+            ]
+        if self.state == "fallback":
+            return self._fallback_many(items)
+        try:
+            return await asyncio.to_thread(self._analyze_many_sync, items)
+        except Exception as error:
+            self.state = "fallback"
+            self._load_error = type(error).__name__
+            logger.warning(
+                "Pretrained models unavailable (%s); using explicit heuristic fallback",
+                self._load_error,
+            )
+            return self._fallback_many(items)
+
+    async def analyze_adaptive_many(
+        self, items: list[tuple[str, list[Comment], DataSource]]
+    ) -> list[AnalysisResult]:
+        initial_size = self.settings.adaptive_initial_comments
+        initial_items = [
+            (video_id, comments[:initial_size], source)
+            for video_id, comments, source in items
+        ]
+        initial_results = await self.analyze_many(initial_items)
+        refine_indices = [
+            index
+            for index, (result, (_, comments, _)) in enumerate(
+                zip(initial_results, items, strict=True)
+            )
+            if len(comments) > initial_size
+            and (
+                result.abstained
+                or result.confidence_score < self.settings.adaptive_expand_confidence
+            )
+        ]
+        if not refine_indices:
+            return initial_results
+        refined = await self.analyze_many([items[index] for index in refine_indices])
+        for index, result in zip(refine_indices, refined, strict=True):
+            initial_results[index] = result
+        return initial_results
+
+    def _fallback_many(
+        self, items: list[tuple[str, list[Comment], DataSource]]
+    ) -> list[AnalysisResult]:
+        return [
+            self.fallback.analyze_scored(
+                video_id,
+                comments,
+                source,
+                [self.fallback.score_comment(comment) for comment in comments],
+                model_version="signal-prism-heuristic-fallback-v1",
+            )
+            for video_id, comments, source in items
+        ]
+
+    def health(self) -> dict[str, str]:
+        payload = {
+            "model_status": self.state,
+            "model_device": self.device,
+            "sentiment_model": self.settings.sentiment_model_name,
+            "toxicity_model": self.settings.toxicity_model_name,
+        }
+        if self._load_error:
+            payload["fallback_reason"] = self._load_error
+        return payload
+
+    def _ensure_loaded(self) -> None:
+        if self.state == "ready":
+            return
+        with self._load_lock:
+            if self.state == "ready":
+                return
+            self.state = "loading"
+            torch = import_module("torch")
+            transformers = import_module("transformers")
+            huggingface_hub = import_module("huggingface_hub")
+            onnxruntime = import_module("onnxruntime")
+            auto_tokenizer = transformers.AutoTokenizer
+            auto_model = transformers.AutoModelForSequenceClassification
+            if self.settings.model_device == "auto":
+                device = "cuda" if torch.cuda.is_available() else "cpu"
+            else:
+                device = self.settings.model_device
+            self._sentiment_tokenizer = auto_tokenizer.from_pretrained(
+                self.settings.sentiment_model_name, use_fast=True
+            )
+            self._sentiment_model = auto_model.from_pretrained(
+                self.settings.sentiment_model_name
+            ).to(device)
+            self._toxicity_tokenizer = auto_tokenizer.from_pretrained(
+                self.settings.toxicity_model_name, use_fast=True
+            )
+            toxicity_path = huggingface_hub.hf_hub_download(
+                repo_id=self.settings.toxicity_model_name, filename="model.onnx"
+            )
+            self._toxicity_session = onnxruntime.InferenceSession(
+                toxicity_path, providers=["CPUExecutionProvider"]
+            )
+            self._sentiment_model.eval()
+            self._torch = torch
+            self.device = device
+            self.state = "ready"
+
+    def _analyze_many_sync(
+        self, items: list[tuple[str, list[Comment], DataSource]]
+    ) -> list[AnalysisResult]:
+        self._ensure_loaded()
+        all_comments = [comment for _, comments, _ in items for comment in comments]
+        texts = [comment.text for comment in all_comments]
+        sentiment = self._predict_sentiment(texts)
+        toxicity = self._predict_toxicity(texts)
+        results: list[AnalysisResult] = []
+        offset = 0
+        for video_id, comments, source in items:
+            scored = []
+            for comment, probabilities, toxicity_probability in zip(
+                comments,
+                sentiment[offset : offset + len(comments)],
+                toxicity[offset : offset + len(comments)],
+                strict=True,
+            ):
+                heuristic = self.fallback.score_comment(comment)
+                scored.append(
+                    CommentScore(
+                        comment=comment,
+                        negative=probabilities[0],
+                        positive=probabilities[1],
+                        neutral=probabilities[2],
+                        toxicity=toxicity_probability,
+                        relevance=heuristic.relevance,
+                    )
+                )
+            results.append(
+                self.fallback.analyze_scored(
+                    video_id,
+                    comments,
+                    source,
+                    scored,
+                    model_version=self.settings.model_version,
+                )
+            )
+            offset += len(comments)
+        return results
+
+    def _batches(self, texts: list[str]) -> list[list[str]]:
+        size = self.settings.model_batch_size
+        return [texts[index : index + size] for index in range(0, len(texts), size)]
+
+    def _encoded(self, tokenizer: Any, texts: list[str]) -> dict[str, Any]:
+        encoded = tokenizer(
+            texts,
+            padding=True,
+            truncation=True,
+            max_length=256,
+            return_tensors="pt",
+        )
+        return {name: value.to(self.device) for name, value in encoded.items()}
+
+    def _predict_sentiment(self, texts: list[str]) -> list[tuple[float, float, float]]:
+        predictions: list[tuple[float, float, float]] = []
+        with self._torch.inference_mode():
+            for batch in self._batches(texts):
+                logits = self._sentiment_model(
+                    **self._encoded(self._sentiment_tokenizer, batch)
+                ).logits
+                rows = self._torch.softmax(logits, dim=-1).detach().cpu().tolist()
+                # The selected checkpoint defines 0=negative, 1=positive, 2=neutral.
+                predictions.extend((float(row[0]), float(row[1]), float(row[2])) for row in rows)
+        return predictions
+
+    def _predict_toxicity(self, texts: list[str]) -> list[float]:
+        predictions: list[float] = []
+        input_names = {item.name for item in self._toxicity_session.get_inputs()}
+        for batch in self._batches(texts):
+            encoded = self._toxicity_tokenizer(
+                batch,
+                padding=True,
+                truncation=True,
+                max_length=256,
+                return_tensors="np",
+            )
+            inputs = {name: value for name, value in encoded.items() if name in input_names}
+            logits = self._toxicity_session.run(None, inputs)[0]
+            for row in logits:
+                value = float(row[0])
+                predictions.append(1 / (1 + math.exp(-value)))
+        return predictions

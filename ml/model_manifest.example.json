@@ -1,0 +1,15 @@
+{
+  "model_version": "visobert-hierarchical-v1",
+  "encoder": "uitnlp/visobert",
+  "tasks": ["sentiment", "toxicity", "relevance"],
+  "temperature": {
+    "sentiment": 1.0,
+    "toxicity": 1.0,
+    "relevance": 1.0
+  },
+  "abstention": {
+    "minimum_relevant_comments": 10,
+    "confidence_threshold": 0.58
+  },
+  "split_policy": "channel_grouped"
+}
