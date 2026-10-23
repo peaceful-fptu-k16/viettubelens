@@ -162,7 +162,13 @@ DEMO_MODE=false
 
 Kiểm tra backend tại `http://127.0.0.1:8000/health`; Swagger UI tại `http://127.0.0.1:8000/docs`. Lần đầu sẽ tải checkpoint, sau đó model được giữ resident cho các lượt tiếp theo.
 
-### 3. Build và cài extension
+### 3. Cài extension
+
+Repository có sẵn bản build trong `apps/extension/dist`. Sau khi clone, có thể mở
+`chrome://extensions`, bật **Developer mode**, chọn **Load unpacked** và trỏ thẳng
+đến thư mục này. Trong popup, nhập URL HTTPS của backend rồi chọn **Lưu & kiểm tra**.
+
+Nếu thay đổi source, build lại bằng:
 
 ```bash
 npm install

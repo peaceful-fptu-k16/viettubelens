@@ -1,5 +1,7 @@
 node_modules/
 dist/
+!apps/extension/dist/
+!apps/extension/dist/**
 .vite/
 .venv/
 __pycache__/
