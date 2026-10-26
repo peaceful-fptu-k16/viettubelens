@@ -23,3 +23,7 @@ test-results/
 .tmp-*/
 .DS_Store
 Thumbs.db
+ml/data/raw/
+ml/data/processed/
+ml/runs/
+ml/artifacts/

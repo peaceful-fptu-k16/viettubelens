@@ -1,7 +1,15 @@
 {
-  "model_version": "visobert-hierarchical-v1",
+  "model_version": "visobert-multitask-v1",
   "encoder": "uitnlp/visobert",
+  "architecture": "shared-encoder-multitask-v1",
+  "format": "onnx",
+  "model_file": "model.onnx",
   "tasks": ["sentiment", "toxicity", "relevance"],
+  "label_order": {
+    "sentiment": ["negative", "neutral", "positive"],
+    "toxicity": ["non_toxic", "toxic"],
+    "relevance": ["irrelevant", "relevant"]
+  },
   "temperature": {
     "sentiment": 1.0,
     "toxicity": 1.0,

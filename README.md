@@ -275,7 +275,7 @@ viettubelens/
 │   ├── app/             # API, collector, queue, model, cache
 │   └── tests/
 ├── docs/                # Contract và annotation guide
-└── ml/                  # Dataset contract, kế hoạch huấn luyện
+└── ml/                  # Multi-task training, calibration và ONNX export
 ```
 
 ## Kiểm thử & chất lượng
@@ -372,6 +372,7 @@ Không dùng `127.0.0.1` trên máy thứ hai. Chạy backend với `--host 0.0.
 - [x] Cache-first batch API và adaptive inference.
 - [x] Sentiment, toxicity, evidence, confidence và abstention.
 - [x] Opinion pattern, polarization và minority evidence.
+- [x] Reproducible multi-task training/calibration/export pipeline.
 - [ ] OpenAPI-generated TypeScript client.
 - [ ] Redis/PostgreSQL cache cho triển khai nhiều instance.
 - [ ] ONNX CUDA provider và benchmark GPU.
