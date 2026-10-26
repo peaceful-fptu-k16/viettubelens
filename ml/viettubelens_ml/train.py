@@ -135,6 +135,14 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--train", type=Path, required=True)
     parser.add_argument("--validation", type=Path, required=True)
+    parser.add_argument(
+        "--allow-silver-validation",
+        action="store_true",
+        help=(
+            "Accept training-split pseudo labels as development data; "
+            "never use for final reporting"
+        ),
+    )
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--base-model", default="uitnlp/visobert")
     parser.add_argument("--epochs", type=int, default=4)
@@ -166,8 +174,13 @@ def main() -> None:
     validation_records = read_jsonl(args.validation)
     if any(record.split != DatasetSplit.TRAIN for record in train_records):
         raise ValueError("Every training record must declare split=train")
-    if any(record.split != DatasetSplit.VALIDATION for record in validation_records):
-        raise ValueError("Every validation record must declare split=validation")
+    valid_validation_splits = (
+        {DatasetSplit.VALIDATION, DatasetSplit.TRAIN}
+        if args.allow_silver_validation
+        else {DatasetSplit.VALIDATION}
+    )
+    if any(record.split not in valid_validation_splits for record in validation_records):
+        raise ValueError("Validation records declare an unsupported split")
     train_loader = DataLoader(
         CommentDataset(train_records),
         batch_size=args.batch_size,

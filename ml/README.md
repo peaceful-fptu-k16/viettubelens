@@ -100,6 +100,23 @@ python -m viettubelens_ml.merge \
   --output data/processed/pseudo-train-merged.jsonl
 ```
 
+Apply the transparent weak-supervision review and create a channel-disjoint
+silver development split:
+
+```bash
+python -m viettubelens_ml.auto_review \
+  --input data/processed/pseudo-train-merged-2026-10-26.jsonl \
+  --output data/processed/silver-reviewed-2026-10-26.jsonl
+
+python -m viettubelens_ml.silver_split \
+  --input data/processed/silver-reviewed-2026-10-26.jsonl \
+  --output-dir data/processed/silver-split \
+  --development-ratio 0.1 \
+  --seed 42
+```
+
+See [`CLOUD_TRAINING.md`](CLOUD_TRAINING.md) for Colab and Kaggle commands.
+
 ## 1. Validate and split by channel
 
 ```bash

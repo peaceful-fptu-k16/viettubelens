@@ -298,7 +298,7 @@ python -m ruff check .
 python -m mypy app
 ```
 
-Trạng thái hiện tại: **4 Vitest + 10 backend pytest + 16 ML pytest passing**,
+Trạng thái hiện tại: **4 Vitest + 10 backend pytest + 19 ML pytest passing**,
 TypeScript strict, Ruff, mypy strict và production build đều đạt.
 
 ## Hiệu năng

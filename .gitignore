@@ -25,5 +25,7 @@ test-results/
 Thumbs.db
 ml/data/raw/
 ml/data/processed/
+ml/data/exports/
+ml/data/human/
 ml/runs/
 ml/artifacts/
