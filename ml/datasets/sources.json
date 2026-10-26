@@ -1,0 +1,31 @@
+{
+  "sources": [
+    {
+      "id": "uitnlp/vihsd",
+      "task": "toxicity",
+      "examples": 33400,
+      "labels": ["clean", "offensive", "hate"],
+      "license_claim": "MIT on the Hugging Face dataset card; gated access requires acceptance",
+      "url": "https://huggingface.co/datasets/uitnlp/vihsd",
+      "use": "Map offensive and hate to toxicity=true; preserve upstream train/dev/test splits"
+    },
+    {
+      "id": "UIT-ViCTSD",
+      "task": "toxicity and constructiveness",
+      "examples": 10000,
+      "labels": ["toxicity", "constructiveness"],
+      "license_claim": "No explicit dataset license found in the official repository; research use requires verification",
+      "url": "https://github.com/tarudesu/ViCTSD",
+      "use": "Do not redistribute until permission or an explicit licence is confirmed"
+    },
+    {
+      "id": "UIT-VSFC",
+      "task": "sentiment",
+      "examples": 16000,
+      "labels": ["negative", "neutral", "positive"],
+      "license_claim": "Original UIT loader lists the dataset licence as unknown; a third-party mirror claims CC BY-NC-SA 4.0",
+      "url": "https://huggingface.co/datasets/uitnlp/vietnamese_students_feedback",
+      "use": "Academic experiments only until the original licence is confirmed"
+    }
+  ]
+}

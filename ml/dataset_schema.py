@@ -32,6 +32,7 @@ class CommentAnnotation(BaseModel):
     comment_id: str = Field(min_length=1)
     channel_id: str = Field(min_length=1)
     topic: str = Field(min_length=1)
+    video_title: str | None = Field(default=None, max_length=500)
     text: str = Field(min_length=1)
     like_count: int = Field(default=0, ge=0)
     sentiment: SentimentLabel | None = None

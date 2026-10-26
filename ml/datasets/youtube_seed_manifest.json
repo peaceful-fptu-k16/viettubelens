@@ -1,0 +1,20 @@
+{
+  "snapshot_date": "2026-10-26",
+  "refresh_or_delete_by": "2026-11-25",
+  "storage": "local-only",
+  "comments_after_deduplication": 8178,
+  "videos": 130,
+  "channels": 95,
+  "topics": 16,
+  "priority_review_records": 1891,
+  "label_distribution": {
+    "sentiment": {"positive": 6235, "negative": 1472, "neutral": 471},
+    "toxicity": {"false": 7615, "true": 563},
+    "relevance": {"true": 7972, "false": 206}
+  },
+  "base_raw_sha256": "b40e447114e3cc9ff0a08d3372fb55b27ca36bd4218cf6337eea34f2b11238a2",
+  "targeted_raw_sha256": "cce62f53014ccdbe1801ead5fa38b0b223f3ef5901b1a3ff0ee6abf2b13ed2a1",
+  "merged_pseudo_train_sha256": "eeed8202c86b9da54c432fce0a6930b37d621ee43d3c451bb1cd81c0ef84c759",
+  "contains_comment_text": false,
+  "policy_note": "Refresh or delete locally cached YouTube API Data within 30 days."
+}

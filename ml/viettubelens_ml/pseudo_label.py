@@ -164,6 +164,7 @@ def main() -> None:
                 comment_id=row["comment_id"],
                 channel_id=row["channel_id"],
                 topic=row["topic"],
+                video_title=row.get("video_title"),
                 text=row["text"],
                 like_count=row.get("like_count", 0),
                 sentiment=sentiment_label,

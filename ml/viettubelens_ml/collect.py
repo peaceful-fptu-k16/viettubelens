@@ -159,14 +159,30 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--env-file", type=Path, default=Path("../backend/.env"))
     parser.add_argument("--topics", default=",".join(DEFAULT_TOPICS))
+    parser.add_argument(
+        "--query-file",
+        type=Path,
+        help="Optional JSON object mapping custom topic names to search queries",
+    )
     parser.add_argument("--videos-per-topic", type=int, default=8)
     parser.add_argument("--comments-per-video", type=int, default=80)
     parser.add_argument("--max-comments", type=int, default=5000)
     args = parser.parse_args()
     if min(args.videos_per_topic, args.comments_per_video, args.max_comments) < 1:
         raise ValueError("Collection limits must be positive")
+    queries = DEFAULT_TOPICS
+    if args.query_file:
+        loaded = json.loads(args.query_file.read_text("utf-8"))
+        if not isinstance(loaded, dict) or not all(
+            isinstance(key, str) and isinstance(value, str) and value.strip()
+            for key, value in loaded.items()
+        ):
+            raise ValueError("query-file must be a JSON object of topic: query strings")
+        queries = loaded
     topics = [topic.strip() for topic in args.topics.split(",") if topic.strip()]
-    unknown = sorted(set(topics) - set(DEFAULT_TOPICS))
+    if args.query_file and args.topics == ",".join(DEFAULT_TOPICS):
+        topics = list(queries)
+    unknown = sorted(set(topics) - set(queries))
     if unknown:
         raise ValueError(f"Unknown topics: {', '.join(unknown)}")
     api_key = load_api_key(args.env_file)
@@ -178,9 +194,15 @@ def main() -> None:
     records: list[dict[str, Any]] = []
     seen_texts: set[str] = set()
     video_counts: Counter[str] = Counter()
+    seen_videos: set[str] = set()
     try:
         for topic in topics:
-            video_ids = collector.discover(DEFAULT_TOPICS[topic], args.videos_per_topic)
+            video_ids = [
+                video_id
+                for video_id in collector.discover(queries[topic], args.videos_per_topic)
+                if video_id not in seen_videos
+            ]
+            seen_videos.update(video_ids)
             metadata = collector.video_metadata(video_ids)
             for video_id in video_ids:
                 if len(records) >= args.max_comments:

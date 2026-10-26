@@ -80,6 +80,26 @@ into `split=train`. The review queue prioritizes uncertain, toxic and likely
 irrelevant samples. Validation and test must still be human-labelled and
 adjudicated.
 
+Launch the manual review UI:
+
+```bash
+python -m pip install -e ".[labeling]"
+streamlit run viettubelens_ml/labeling_app.py -- \
+  --input data/processed/pseudo-train-2026-10-26.jsonl \
+  --output data/human/annotator-a.jsonl \
+  --annotator-id annotator-a
+```
+
+Merge independently collected or labelled batches with exact normalized-text
+deduplication:
+
+```bash
+python -m viettubelens_ml.merge \
+  --input data/processed/pseudo-train-2026-10-26.jsonl \
+          data/processed/pseudo-targeted-2026-10-26.jsonl \
+  --output data/processed/pseudo-train-merged.jsonl
+```
+
 ## 1. Validate and split by channel
 
 ```bash

@@ -278,6 +278,11 @@ viettubelens/
 └── ml/                  # Multi-task training, calibration và ONNX export
 ```
 
+Thư mục ML còn có collector đã ẩn danh, truy vấn thu thập có thể tái tạo,
+pseudo-label kèm provenance/confidence, dedup và giao diện kiểm duyệt thủ công.
+Comment text lấy từ YouTube được giữ ngoài Git; [`ml/datasets`](ml/datasets)
+chỉ lưu manifest, nguồn dữ liệu, giấy phép và hướng dẫn gán nhãn.
+
 ## Kiểm thử & chất lượng
 
 ```bash
@@ -293,7 +298,8 @@ python -m ruff check .
 python -m mypy app
 ```
 
-Trạng thái hiện tại: **4 Vitest + 10 pytest passing**, TypeScript strict, Ruff, mypy strict và production build đều đạt.
+Trạng thái hiện tại: **4 Vitest + 10 backend pytest + 16 ML pytest passing**,
+TypeScript strict, Ruff, mypy strict và production build đều đạt.
 
 ## Hiệu năng
 
