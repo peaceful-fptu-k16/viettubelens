@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     cache_ttl_seconds: int = Field(default=86_400, ge=60)
     model_version: str = "visobert-social-sentiment+visobert-toxicity-adaptive-v3"
     use_pretrained_models: bool = True
+    multitask_model_path: Path | None = None
     sentiment_model_name: str = "5CD-AI/Vietnamese-Sentiment-visobert"
     toxicity_model_name: str = "dangvansam/vietnamese-toxicity"
     model_device: str = "auto"

@@ -4,6 +4,42 @@ from app.model_service import PretrainedModelService
 from app.schemas import Comment, DataSource
 
 
+class FakeOnnxInput:
+    def __init__(self, name: str) -> None:
+        self.name = name
+
+
+class FakeMultitaskTokenizer:
+    def __call__(self, texts, **kwargs):
+        import numpy as np
+
+        del kwargs
+        return {
+            "input_ids": np.ones((len(texts), 3), dtype=np.int64),
+            "attention_mask": np.ones((len(texts), 3), dtype=np.int64),
+        }
+
+
+class FakeMultitaskSession:
+    def get_inputs(self):
+        return [FakeOnnxInput("input_ids"), FakeOnnxInput("attention_mask")]
+
+    def run(self, output_names, inputs):
+        import numpy as np
+
+        assert output_names == [
+            "sentiment_logits",
+            "toxicity_logits",
+            "relevance_logits",
+        ]
+        batch = inputs["input_ids"].shape[0]
+        return [
+            np.tile(np.array([[0.0, 1.0, 3.0]], dtype=np.float32), (batch, 1)),
+            np.full((batch,), 2.0, dtype=np.float32),
+            np.full((batch,), -2.0, dtype=np.float32),
+        ]
+
+
 def test_analyzer_returns_grounded_result(tmp_path):
     settings = Settings(cache_path=tmp_path / "test.db", min_relevant_comments=3)
     analyzer = ReactionAnalyzer(settings)
@@ -89,3 +125,15 @@ async def test_adaptive_analysis_expands_uncertain_signal(tmp_path):
         [("adaptive002", comments, DataSource.DEMO)]
     )
     assert result.sample_size == 30
+
+
+def test_multitask_onnx_output_is_mapped_to_aggregator_order(tmp_path):
+    settings = Settings(cache_path=tmp_path / "test.db", use_pretrained_models=True)
+    service = PretrainedModelService(settings, ReactionAnalyzer(settings))
+    service._multitask_tokenizer = FakeMultitaskTokenizer()
+    service._multitask_session = FakeMultitaskSession()
+    sentiment, toxicity, relevance = service._predict_multitask(["Bình luận thử nghiệm"])
+    negative, positive, neutral = sentiment[0]
+    assert positive > neutral > negative
+    assert toxicity[0] > 0.5
+    assert relevance[0] < 0.5

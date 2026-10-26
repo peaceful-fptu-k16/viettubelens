@@ -158,6 +158,8 @@ Mặc định `.env.example` bật demo mode. Để dùng bình luận thật:
 ```dotenv
 YOUTUBE_API_KEY=your_new_key_here
 DEMO_MODE=false
+MULTITASK_MODEL_PATH=models/visobert-multitask-silver-v1
+MODEL_VERSION=visobert-multitask-silver-v1
 ```
 
 Kiểm tra backend tại `http://127.0.0.1:8000/health`; Swagger UI tại `http://127.0.0.1:8000/docs`. Lần đầu sẽ tải checkpoint, sau đó model được giữ resident cho các lượt tiếp theo.
@@ -187,6 +189,8 @@ npm run build
 | `YOUTUBE_API_KEY` | trống | API key chỉ lưu ở backend. |
 | `DEMO_MODE` | `true` trong example | Dùng dữ liệu mô phỏng, không tiêu quota. |
 | `USE_PRETRAINED_MODELS` | `true` | Tắt để dùng heuristic fallback trong test/máy nhẹ. |
+| `MULTITASK_MODEL_PATH` | local model path | ONNX artifact của model VietTubeLens đã fine-tune. |
+| `MODEL_VERSION` | tùy artifact | Khóa version dùng cho cache và API result. |
 | `MODEL_DEVICE` | `auto` | PyTorch chọn CUDA nếu khả dụng, ngược lại dùng CPU. |
 | `MODEL_BATCH_SIZE` | `16` | Số comment mỗi lượt model inference. |
 | `ANALYSIS_CONCURRENCY` | `3` | Số video tối đa trong một micro-batch. |
@@ -198,7 +202,9 @@ npm run build
 | `CACHE_PATH` | `data/viettubelens.db` | Đường dẫn SQLite cache. |
 
 > [!NOTE]
-> Sentiment model có thể dùng CUDA. Toxicity model hiện vẫn dùng ONNX `CPUExecutionProvider`; cần đổi provider và cài `onnxruntime-gpu` để triển khai GPU hoàn chỉnh.
+> Khi `MULTITASK_MODEL_PATH` được cấu hình, cả ba task dùng chung model ONNX local
+> với `CPUExecutionProvider`. Nếu artifact vắng mặt hoặc lỗi, backend chuyển sang
+> heuristic fallback thay vì làm hỏng API.
 
 ### Cài extension trên máy khác
 
@@ -298,7 +304,7 @@ python -m ruff check .
 python -m mypy app
 ```
 
-Trạng thái hiện tại: **4 Vitest + 10 backend pytest + 19 ML pytest passing**,
+Trạng thái hiện tại: **4 Vitest + 11 backend pytest + 19 ML pytest passing**,
 TypeScript strict, Ruff, mypy strict và production build đều đạt.
 
 ## Hiệu năng
@@ -317,7 +323,7 @@ Hiệu năng phụ thuộc CPU/GPU, YouTube API, cache và số comment; không 
 - Extension chỉ gửi YouTube video ID đã validate đến backend đã cấu hình.
 - YouTube API key không được đóng gói trong extension.
 - Evidence đến từ bình luận công khai.
-- `.env`, SQLite cache, virtual environment và model cache bị loại khỏi Git.
+- `.env`, SQLite cache, virtual environment và model artifact bị loại khỏi Git.
 - Demo output luôn được đánh dấu `source=demo`.
 - Extension không tải JavaScript hoặc font từ CDN.
 

@@ -34,7 +34,7 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--calibration", type=Path)
     parser.add_argument("--model-version", default="visobert-multitask-v1")
-    parser.add_argument("--opset", type=int, default=17)
+    parser.add_argument("--opset", type=int, default=18)
     args = parser.parse_args()
 
     from transformers import AutoTokenizer
@@ -51,8 +51,9 @@ def main() -> None:
     )
     args.output_dir.mkdir(parents=True, exist_ok=True)
     model_path = args.output_dir / "model.onnx"
+    wrapper = OnnxWrapper(model).eval()
     torch.onnx.export(
-        OnnxWrapper(model),
+        wrapper,
         (encoded["input_ids"], encoded["attention_mask"]),
         model_path,
         input_names=["input_ids", "attention_mask"],
@@ -60,7 +61,7 @@ def main() -> None:
             "sentiment_logits",
             "toxicity_logits",
             "relevance_logits",
-            "embedding",
+            "pooled_embedding",
         ],
         dynamic_axes={
             "input_ids": {0: "batch", 1: "sequence"},
@@ -68,7 +69,7 @@ def main() -> None:
             "sentiment_logits": {0: "batch"},
             "toxicity_logits": {0: "batch"},
             "relevance_logits": {0: "batch"},
-            "embedding": {0: "batch"},
+            "pooled_embedding": {0: "batch"},
         },
         opset_version=args.opset,
         do_constant_folding=True,

@@ -71,9 +71,17 @@ class MultiTaskModel(nn.Module):
     def from_checkpoint(cls, checkpoint_dir: Path, device: str = "cpu") -> MultiTaskModel:
         import json
 
+        from transformers import AutoConfig, AutoModel
+
         config = json.loads((checkpoint_dir / "multitask_config.json").read_text("utf-8"))
-        model = cls.from_pretrained(
-            config["base_model"],
+        encoder_config_source: str | Path = (
+            checkpoint_dir if (checkpoint_dir / "config.json").exists() else config["base_model"]
+        )
+        encoder_config = AutoConfig.from_pretrained(encoder_config_source)
+        encoder = AutoModel.from_config(encoder_config)  # type: ignore[no-untyped-call]
+        model = cls(
+            encoder,
+            int(encoder_config.hidden_size),
             dropout=float(config["dropout"]),
             task_weights=config["task_weights"],
         )
@@ -86,6 +94,8 @@ class MultiTaskModel(nn.Module):
 
         output_dir.mkdir(parents=True, exist_ok=True)
         torch.save(self.state_dict(), output_dir / "model.pt")
+        encoder_config: Any = cast(Any, self.encoder).config
+        encoder_config.save_pretrained(output_dir)
         config = {
             "architecture": "shared-encoder-multitask-v1",
             "base_model": base_model,

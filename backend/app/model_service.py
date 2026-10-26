@@ -1,8 +1,10 @@
 import asyncio
+import json
 import logging
 import math
 import threading
 from importlib import import_module
+from pathlib import Path
 from typing import Any
 
 from .analyzer import CommentScore, ReactionAnalyzer
@@ -21,6 +23,10 @@ class PretrainedModelService:
         self.state = "disabled" if not settings.use_pretrained_models else "lazy"
         self.device = "not-loaded"
         self._torch: Any = None
+        self._multitask_tokenizer: Any = None
+        self._multitask_session: Any = None
+        self._temperatures = {"sentiment": 1.0, "toxicity": 1.0, "relevance": 1.0}
+        self._active_model_version = settings.model_version
         self._sentiment_tokenizer: Any = None
         self._sentiment_model: Any = None
         self._toxicity_tokenizer: Any = None
@@ -112,9 +118,15 @@ class PretrainedModelService:
         payload = {
             "model_status": self.state,
             "model_device": self.device,
-            "sentiment_model": self.settings.sentiment_model_name,
-            "toxicity_model": self.settings.toxicity_model_name,
+            "model_version": self._active_model_version,
         }
+        if self.settings.multitask_model_path:
+            payload["model_backend"] = "local-multitask-onnx"
+            payload["model_path"] = str(self.settings.multitask_model_path)
+        else:
+            payload["model_backend"] = "legacy-dual-model"
+            payload["sentiment_model"] = self.settings.sentiment_model_name
+            payload["toxicity_model"] = self.settings.toxicity_model_name
         if self._load_error:
             payload["fallback_reason"] = self._load_error
         return payload
@@ -126,11 +138,35 @@ class PretrainedModelService:
             if self.state == "ready":
                 return
             self.state = "loading"
-            torch = import_module("torch")
             transformers = import_module("transformers")
-            huggingface_hub = import_module("huggingface_hub")
             onnxruntime = import_module("onnxruntime")
             auto_tokenizer = transformers.AutoTokenizer
+            if self.settings.multitask_model_path:
+                model_dir = Path(self.settings.multitask_model_path)
+                manifest_path = model_dir / "model_manifest.json"
+                if not manifest_path.is_file():
+                    raise FileNotFoundError(f"Missing model manifest: {manifest_path}")
+                manifest = json.loads(manifest_path.read_text("utf-8"))
+                model_path = model_dir / str(manifest["model_file"])
+                if not model_path.is_file():
+                    raise FileNotFoundError(f"Missing ONNX model: {model_path}")
+                self._multitask_tokenizer = auto_tokenizer.from_pretrained(
+                    model_dir, use_fast=True
+                )
+                self._multitask_session = onnxruntime.InferenceSession(
+                    str(model_path), providers=["CPUExecutionProvider"]
+                )
+                self._temperatures = {
+                    name: float(value)
+                    for name, value in manifest.get("temperature", {}).items()
+                }
+                self._active_model_version = str(manifest["model_version"])
+                self.device = "onnx-cpu"
+                self.state = "ready"
+                return
+
+            torch = import_module("torch")
+            huggingface_hub = import_module("huggingface_hub")
             auto_model = transformers.AutoModelForSequenceClassification
             if self.settings.model_device == "auto":
                 device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -162,18 +198,26 @@ class PretrainedModelService:
         self._ensure_loaded()
         all_comments = [comment for _, comments, _ in items for comment in comments]
         texts = [comment.text for comment in all_comments]
-        sentiment = self._predict_sentiment(texts)
-        toxicity = self._predict_toxicity(texts)
+        if self._multitask_session is not None:
+            sentiment, toxicity, relevance = self._predict_multitask(texts)
+        else:
+            sentiment = self._predict_sentiment(texts)
+            toxicity = self._predict_toxicity(texts)
+            relevance = None
         results: list[AnalysisResult] = []
         offset = 0
         for video_id, comments, source in items:
             scored = []
-            for comment, probabilities, toxicity_probability in zip(
+            item_relevance = (
+                relevance[offset : offset + len(comments)] if relevance is not None else None
+            )
+            rows = zip(
                 comments,
                 sentiment[offset : offset + len(comments)],
                 toxicity[offset : offset + len(comments)],
                 strict=True,
-            ):
+            )
+            for index, (comment, probabilities, toxicity_probability) in enumerate(rows):
                 heuristic = self.fallback.score_comment(comment)
                 scored.append(
                     CommentScore(
@@ -182,7 +226,11 @@ class PretrainedModelService:
                         positive=probabilities[1],
                         neutral=probabilities[2],
                         toxicity=toxicity_probability,
-                        relevance=heuristic.relevance,
+                        relevance=(
+                            item_relevance[index]
+                            if item_relevance is not None
+                            else heuristic.relevance
+                        ),
                     )
                 )
             results.append(
@@ -191,7 +239,7 @@ class PretrainedModelService:
                     comments,
                     source,
                     scored,
-                    model_version=self.settings.model_version,
+                    model_version=self._active_model_version,
                 )
             )
             offset += len(comments)
@@ -240,3 +288,57 @@ class PretrainedModelService:
                 value = float(row[0])
                 predictions.append(1 / (1 + math.exp(-value)))
         return predictions
+
+    @staticmethod
+    def _sigmoid(value: float, temperature: float) -> float:
+        scaled = max(-30.0, min(30.0, value / max(0.05, temperature)))
+        return 1 / (1 + math.exp(-scaled))
+
+    @staticmethod
+    def _softmax(values: list[float], temperature: float) -> list[float]:
+        scaled = [value / max(0.05, temperature) for value in values]
+        peak = max(scaled)
+        exponentials = [math.exp(value - peak) for value in scaled]
+        total = sum(exponentials)
+        return [value / total for value in exponentials]
+
+    def _predict_multitask(
+        self, texts: list[str]
+    ) -> tuple[list[tuple[float, float, float]], list[float], list[float]]:
+        sentiment: list[tuple[float, float, float]] = []
+        toxicity: list[float] = []
+        relevance: list[float] = []
+        input_names = {item.name for item in self._multitask_session.get_inputs()}
+        for batch in self._batches(texts):
+            encoded = self._multitask_tokenizer(
+                batch,
+                padding=True,
+                truncation=True,
+                max_length=256,
+                return_tensors="np",
+            )
+            inputs = {name: value for name, value in encoded.items() if name in input_names}
+            outputs = self._multitask_session.run(
+                ["sentiment_logits", "toxicity_logits", "relevance_logits"], inputs
+            )
+            for sentiment_row, toxicity_logit, relevance_logit in zip(
+                outputs[0], outputs[1], outputs[2], strict=True
+            ):
+                probabilities = self._softmax(
+                    [float(value) for value in sentiment_row],
+                    self._temperatures.get("sentiment", 1.0),
+                )
+                # Export order: negative, neutral, positive. Aggregator order:
+                # negative, positive, neutral.
+                sentiment.append((probabilities[0], probabilities[2], probabilities[1]))
+                toxicity.append(
+                    self._sigmoid(
+                        float(toxicity_logit), self._temperatures.get("toxicity", 1.0)
+                    )
+                )
+                relevance.append(
+                    self._sigmoid(
+                        float(relevance_logit), self._temperatures.get("relevance", 1.0)
+                    )
+                )
+        return sentiment, toxicity, relevance

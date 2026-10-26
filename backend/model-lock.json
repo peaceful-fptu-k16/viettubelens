@@ -1,0 +1,22 @@
+{
+  "model_version": "visobert-multitask-silver-v1",
+  "source_checkpoint_sha256": "2e8e874a296696f862dd977bc01ae65c88821e412d25bf58bf05f3dbddc5e91b",
+  "runtime": "onnxruntime-cpu",
+  "calibration": "identity-temperature; human calibration pending",
+  "artifacts": {
+    "model.onnx": "7a108a35e22acd3376049d65c3f79c24cf8b756f6a650f6b8d58988774ddfe95",
+    "model.onnx.data": "5abc32f4caaf172cab18b5dec5ecf7a40d9bb7d692b2778fe2d476d320d7d5d1",
+    "tokenizer.json": "ae77024015911a03b63f93a5f94a3d80b465453499f4fc4775bb1be90aed8f9a"
+  },
+  "pytorch_onnx_max_delta": {
+    "sentiment_logits": 0.00000166893,
+    "toxicity_logits": 0.00000405312,
+    "relevance_logits": 0.000000953674
+  },
+  "silver_development_metrics": {
+    "sentiment_macro_f1": 0.6412094692,
+    "toxicity_macro_f1": 0.8486499188,
+    "toxicity_pr_auc": 0.8869861379,
+    "relevance_macro_f1": 0.8951923077
+  }
+}
