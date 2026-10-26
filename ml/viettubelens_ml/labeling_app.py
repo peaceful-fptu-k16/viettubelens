@@ -7,8 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from dataset_schema import CommentAnnotation, LabelSource, SentimentLabel
-
-from .data import read_jsonl
+from viettubelens_ml.data import read_jsonl
 
 
 def parse_args() -> argparse.Namespace:
