@@ -1,6 +1,8 @@
 """Validated annotation records used by training and evaluation."""
 
+from datetime import datetime
 from enum import StrEnum
+from typing import Annotated
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -36,9 +38,15 @@ class CommentAnnotation(BaseModel):
     toxicity: bool | None = None
     relevance: bool | None = None
     label_source: LabelSource = LabelSource.HUMAN
+    label_confidences: dict[str, Annotated[float, Field(ge=0, le=1)]] = Field(
+        default_factory=dict
+    )
+    labeling_models: dict[str, str] = Field(default_factory=dict)
     annotator_ids: list[str] = Field(default_factory=list)
     adjudicated: bool = False
     split: DatasetSplit | None = None
+    collected_at: datetime | None = None
+    published_at: datetime | None = None
 
     @model_validator(mode="after")
     def validate_annotation(self) -> "CommentAnnotation":
@@ -46,6 +54,8 @@ class CommentAnnotation(BaseModel):
             raise ValueError("At least one task label is required")
         if self.label_source == LabelSource.HUMAN and not self.annotator_ids:
             raise ValueError("Human labels require at least one annotator_id")
+        if self.label_source == LabelSource.PSEUDO and not self.labeling_models:
+            raise ValueError("Pseudo-labels require labeling model provenance")
         if (
             self.split in {DatasetSplit.VALIDATION, DatasetSplit.TEST}
             and self.label_source == LabelSource.PSEUDO

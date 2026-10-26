@@ -55,6 +55,31 @@ One JSON object per line:
 At least one of `sentiment`, `toxicity` or `relevance` is required. Missing task
 labels are masked during training. Human labels require `annotator_ids`.
 
+## Collect and pseudo-label a seed dataset
+
+The collector keeps public top-level comments only, omits author fields, hashes
+source comment IDs and excludes livestreams. Real records stay under ignored
+`data/raw` and `data/processed` directories.
+
+```bash
+python -m viettubelens_ml.collect \
+  --output data/raw/youtube-comments.jsonl \
+  --env-file ../backend/.env \
+  --videos-per-topic 8 \
+  --comments-per-video 80 \
+  --max-comments 5000
+
+python -m viettubelens_ml.pseudo_label \
+  --input data/raw/youtube-comments.jsonl \
+  --output data/processed/pseudo-train.jsonl \
+  --review-output data/processed/human-review-queue.jsonl
+```
+
+Every pseudo-label records its model provenance and confidence and is forced
+into `split=train`. The review queue prioritizes uncertain, toxic and likely
+irrelevant samples. Validation and test must still be human-labelled and
+adjudicated.
+
 ## 1. Validate and split by channel
 
 ```bash

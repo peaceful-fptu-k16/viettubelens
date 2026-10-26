@@ -52,7 +52,22 @@ def test_gold_test_rejects_pseudo_labels() -> None:
             text="Pseudo label không được phép ở gold test",
             sentiment=SentimentLabel.NEUTRAL,
             label_source=LabelSource.PSEUDO,
+            labeling_models={"sentiment": "test-model"},
             split=DatasetSplit.TEST,
+        )
+
+
+def test_pseudo_labels_require_model_provenance() -> None:
+    with pytest.raises(ValueError, match="model provenance"):
+        CommentAnnotation(
+            video_id="video001",
+            comment_id="comment-1",
+            channel_id="channel-a",
+            topic="music",
+            text="Nhãn tự động phải ghi nguồn model",
+            sentiment=SentimentLabel.NEUTRAL,
+            label_source=LabelSource.PSEUDO,
+            split=DatasetSplit.TRAIN,
         )
 
 
@@ -66,6 +81,7 @@ def test_pseudo_label_channels_are_reserved_for_training() -> None:
         text="Ví dụ pseudo label chỉ dành cho train",
         sentiment=SentimentLabel.NEUTRAL,
         label_source=LabelSource.PSEUDO,
+        labeling_models={"sentiment": "test-model"},
     )
     splits = channel_grouped_split([*records, pseudo], seed=2)
     assert any(item.channel_id == "pseudo-channel" for item in splits[DatasetSplit.TRAIN])
