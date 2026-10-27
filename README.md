@@ -119,9 +119,14 @@ Các trạng thái `queued`, `ready`, `insufficient_data`, `unavailable`, `error
 ### 1. Clone repository
 
 ```bash
+git lfs install
 git clone https://github.com/peaceful-fptu-k16/viettubelens.git
 cd viettubelens
+git lfs pull
 ```
+
+Model ONNX fine-tuned được lưu bằng Git LFS trong
+`backend/models/visobert-multitask-silver-v1` (khoảng 376 MB).
 
 ### 2. Chạy backend
 

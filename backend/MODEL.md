@@ -1,8 +1,15 @@
 # Local multi-task model
 
 The backend prefers the fine-tuned VietTubeLens ONNX artifact when
-`MULTITASK_MODEL_PATH` is configured. Model binaries are intentionally ignored
-by Git; `model-lock.json` records their expected hashes and provenance.
+`MULTITASK_MODEL_PATH` is configured. The deployment artifact is versioned with
+Git LFS; `model-lock.json` records its expected hashes and provenance.
+
+Install Git LFS before cloning or pulling the model:
+
+```powershell
+git lfs install
+git lfs pull
+```
 
 Expected local layout:
 

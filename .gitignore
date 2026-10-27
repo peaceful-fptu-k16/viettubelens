@@ -29,4 +29,6 @@ ml/data/exports/
 ml/data/human/
 ml/runs/
 ml/artifacts/
-backend/models/
+backend/models/*
+!backend/models/visobert-multitask-silver-v1/
+!backend/models/visobert-multitask-silver-v1/**

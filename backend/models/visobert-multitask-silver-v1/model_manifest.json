@@ -1,0 +1,38 @@
+{
+  "model_version": "visobert-multitask-silver-v1",
+  "created_at": "2026-10-26T07:45:50.246312+00:00",
+  "architecture": "shared-encoder-multitask-v1",
+  "encoder": "uitnlp/visobert",
+  "format": "onnx",
+  "model_file": "model.onnx",
+  "tasks": [
+    "sentiment",
+    "toxicity",
+    "relevance"
+  ],
+  "label_order": {
+    "sentiment": [
+      "negative",
+      "neutral",
+      "positive"
+    ],
+    "toxicity": [
+      "non_toxic",
+      "toxic"
+    ],
+    "relevance": [
+      "irrelevant",
+      "relevant"
+    ]
+  },
+  "temperature": {
+    "sentiment": 1,
+    "toxicity": 1,
+    "relevance": 1
+  },
+  "abstention": {
+    "minimum_relevant_comments": 10,
+    "confidence_threshold": 0.58
+  },
+  "split_policy": "channel_grouped"
+}
