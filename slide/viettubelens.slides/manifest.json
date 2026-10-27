@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0",
+  "format": "html",
+  "metadata": {
+    "title": "VietTubeLens",
+    "description": "Bảo vệ đồ án — Chrome Extension phân tích phản ứng trong bình luận YouTube tiếng Việt",
+    "author": "Nguyễn Thanh Bình, Mai Văn An, Phạm Đình Hoàng, Đỗ Doãn Bắc"
+  },
+  "canvas": {"width": 1920, "height": 1080},
+  "playlist": [
+    "cover.html",
+    "context.html",
+    "user-problems.html",
+    "solution.html",
+    "signal-prism.html",
+    "experience.html",
+    "interface.html",
+    "states.html",
+    "architecture.html",
+    "data-flow.html",
+    "dataset.html",
+    "label-distribution.html",
+    "model.html",
+    "training.html",
+    "results.html",
+    "trust.html",
+    "roadmap.html",
+    "thank-you.html"
+  ]
+}

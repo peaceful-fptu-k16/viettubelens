@@ -1,0 +1,29 @@
+:root{
+  --violet:#7C5CFC; --cyan:#22D3EE; --lime:#A3E635; --ink:#0B1020; --surface:#F7F8FC; --white:#FFFFFF;
+  --pos:#14B8A6; --neu:#64748B; --neg:#F97373; --tox:#DB5AC8; --warn:#F59E0B;
+  --line:#E3E7F1; --muted:#5B6478;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;overflow:hidden;background:#F7F8FC}
+body{font-family:Inter,'Be Vietnam Pro',Arial,sans-serif;color:#0B1020;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul,li{margin:0;padding:0}
+p,h1,h2,h3,li,span{overflow-wrap:normal;word-break:normal}
+p,h1,h2,h3{white-space:normal;text-wrap:pretty}
+li > span:last-child{text-wrap:balance}
+ul{list-style:none}
+.h{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif}
+.kicker{font-family:Inter,'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:26px;line-height:1.2;letter-spacing:.16em;text-transform:uppercase;color:#7C5CFC}
+.title{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:800;font-size:64px;line-height:1.15;letter-spacing:-.02em;color:#0B1020}
+.lead{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:46px;line-height:1.22;letter-spacing:-.01em;color:#0B1020}
+.body{font-size:34px;line-height:1.35;color:#2A3247}
+.cap{font-size:28px;line-height:1.35;color:#5B6478}
+.foot{font-size:26px;line-height:1.2;color:#64748B;font-weight:500}
+.src{font-size:26px;line-height:1.2;color:#64748B;font-style:italic;text-align:right}
+.pg{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:26px;line-height:1.2;color:#0B1020;text-align:right}
+.mono{font-family:'JetBrains Mono',Consolas,'Courier New',monospace}
+.prism-text{background:linear-gradient(90deg,#7C5CFC,#22D3EE 55%,#A3E635);-webkit-background-clip:text;background-clip:text;color:transparent}
+.t34{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:34px;line-height:1.25;color:#0B1020}
+.story-card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 44px -32px rgba(11,16,32,.28)}
+.stage-label{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-size:24px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
+.fit-text{min-width:0;max-width:100%;white-space:normal;text-wrap:pretty}
+.metric-value{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-variant-numeric:tabular-nums lining-nums}

@@ -1,0 +1,12 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="prism" x1="18" y1="18" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7C5CFC"/><stop offset="0.52" stop-color="#22D3EE"/><stop offset="1" stop-color="#A3E635"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#0B1020" flood-opacity="0.28"/></filter>
+  </defs>
+  <rect x="8" y="8" width="112" height="112" rx="34" fill="#0B1020"/>
+  <path d="M94 87.5C83.9 97 72.1 101 58.8 99.6C36.6 97.2 20 78.9 20 56.9C20 33.3 39.1 14 62.7 14C86.4 14 105.5 33.2 105.5 56.9C105.5 66.1 102.6 74.7 97.6 81.7L101 105L82.4 94.1" stroke="url(#prism)" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" filter="url(#shadow)"/>
+  <path d="M42 54L58 68L85 41" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="87" cy="72" r="5" fill="#A3E635"/>
+</svg>

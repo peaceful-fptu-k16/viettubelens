@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><title>Phân bố nhãn</title>
+<link rel="stylesheet" href="../assets/deck.css"><link rel="stylesheet" href="../assets/slide-runtime.css"></head>
+<body>
+<div class="slide-container" data-screen-label="12 Phân bố nhãn" style="position:relative;width:1920px;height:1080px;overflow:hidden;background:#F7F8FC;">
+
+  <div data-object="true" data-object-type="textbox" class="kicker" style="position:absolute;left:72px;top:72px;width:700px;z-index:10;">Dữ liệu &amp; mô hình</div>
+  <div data-object="true" data-object-type="textbox" class="title" style="position:absolute;left:72px;top:110px;width:900px;z-index:10;">Phân bố nhãn</div>
+
+  <!-- Sentiment -->
+  <div data-object="true" data-object-type="textbox" class="t34" style="position:absolute;left:72px;top:262px;width:800px;z-index:10;">Sentiment <span style="font-family:Inter,Arial;font-weight:500;font-size:26px;color:#64748B;">· n = 8.178</span></div>
+  <div data-object="true" data-object-type="chart" style="position:absolute;left:72px;top:320px;width:1776px;height:76px;z-index:10;">
+    <svg width="1776" height="76" viewBox="0 0 1776 76">
+      <rect x="0" y="0" width="1348" height="76" rx="0" fill="#14B8A6"/>
+      <rect x="1348" y="0" width="316" height="76" fill="#F97373"/>
+      <rect x="1664" y="0" width="112" height="76" fill="#64748B"/>
+      <text x="28" y="49" font-family="Manrope,Arial" font-weight="700" font-size="30" fill="#FFFFFF">Positive 75,9%</text>
+      <text x="1370" y="49" font-family="Manrope,Arial" font-weight="700" font-size="30" fill="#0B1020">17,8%</text>
+      <text x="1720" y="49" text-anchor="middle" font-family="Manrope,Arial" font-weight="700" font-size="26" fill="#FFFFFF">6,3%</text>
+    </svg>
+  </div>
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:72px;top:416px;width:1776px;z-index:10;">
+    <div style="display:flex;gap:56px;font-size:28px;line-height:1.3;color:#2A3247;">
+      <span style="display:flex;align-items:center;gap:12px;"><i style="width:20px;height:20px;border-radius:5px;background:#14B8A6;display:inline-block;"></i>Positive <b>6.209 — 75,9%</b></span>
+      <span style="display:flex;align-items:center;gap:12px;"><i style="width:20px;height:20px;border-radius:5px;background:#F97373;display:inline-block;"></i>Negative <b>1.452 — 17,8%</b></span>
+      <span style="display:flex;align-items:center;gap:12px;"><i style="width:20px;height:20px;border-radius:5px;background:#64748B;display:inline-block;"></i>Neutral <b>517 — 6,3%</b></span>
+    </div>
+  </div>
+
+  <!-- Toxicity donut -->
+  <div data-object="true" data-object-type="textbox" class="t34" style="position:absolute;left:72px;top:524px;width:800px;z-index:10;">Toxicity</div>
+  <div data-object="true" data-object-type="chart" style="position:absolute;left:72px;top:590px;width:280px;height:280px;z-index:10;">
+    <svg width="280" height="280" viewBox="0 0 280 280">
+      <circle cx="140" cy="140" r="110" fill="none" stroke="#CBD2E1" stroke-width="40"/>
+      <circle cx="140" cy="140" r="110" fill="none" stroke="#DB5AC8" stroke-width="40" stroke-dasharray="48.38 642.77" transform="rotate(-90 140 140)"/>
+      <text x="140" y="146" text-anchor="middle" font-family="Manrope,Arial" font-weight="800" font-size="46" fill="#0B1020">7,0%</text>
+      <text x="140" y="184" text-anchor="middle" font-family="Inter,Arial" font-weight="600" font-size="24" fill="#B93FA6">toxic</text>
+    </svg>
+  </div>
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:392px;top:650px;width:460px;z-index:10;">
+    <p style="display:flex;align-items:center;gap:12px;font-size:28px;line-height:1.3;color:#2A3247;"><i style="width:20px;height:20px;border-radius:5px;background:#DB5AC8;display:inline-block;"></i>Toxic <b>573 — 7,0%</b></p>
+    <p style="margin-top:18px;display:flex;align-items:center;gap:12px;font-size:28px;line-height:1.3;color:#2A3247;"><i style="width:20px;height:20px;border-radius:5px;background:#CBD2E1;display:inline-block;"></i>Clean <b>7.605 — 93,0%</b></p>
+  </div>
+
+  <!-- Relevance donut -->
+  <div data-object="true" data-object-type="textbox" class="t34" style="position:absolute;left:960px;top:524px;width:800px;z-index:10;">Relevance</div>
+  <div data-object="true" data-object-type="chart" style="position:absolute;left:960px;top:590px;width:280px;height:280px;z-index:10;">
+    <svg width="280" height="280" viewBox="0 0 280 280">
+      <circle cx="140" cy="140" r="110" fill="none" stroke="#7C5CFC" stroke-width="40"/>
+      <circle cx="140" cy="140" r="110" fill="none" stroke="#F59E0B" stroke-width="40" stroke-dasharray="25.57 665.58" transform="rotate(-90 140 140)"/>
+      <text x="140" y="146" text-anchor="middle" font-family="Manrope,Arial" font-weight="800" font-size="46" fill="#0B1020">96,3%</text>
+      <text x="140" y="184" text-anchor="middle" font-family="Inter,Arial" font-weight="600" font-size="24" fill="#7C5CFC">relevant</text>
+    </svg>
+  </div>
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:1280px;top:650px;width:560px;z-index:10;">
+    <p style="display:flex;align-items:center;gap:12px;font-size:28px;line-height:1.3;color:#2A3247;"><i style="width:20px;height:20px;border-radius:5px;background:#7C5CFC;display:inline-block;"></i>Relevant <b>7.878 — 96,3%</b></p>
+    <p style="margin-top:18px;display:flex;align-items:center;gap:12px;font-size:28px;line-height:1.3;color:#2A3247;"><i style="width:20px;height:20px;border-radius:5px;background:#F59E0B;display:inline-block;"></i>Irrelevant <b>300 — 3,7%</b></p>
+  </div>
+
+  <!-- note -->
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:72px;top:900px;width:1776px;font-size:28px;line-height:1.35;color:#0B1020;font-weight:600;z-index:10;">Dữ liệu mất cân bằng; Macro-F1 và PR-AUC được ưu tiên hơn accuracy.</div>
+  <div data-object="true" data-object-type="textbox" class="src" style="position:absolute;left:948px;top:948px;width:900px;z-index:10;">Nguồn: VietTubeLens dataset manifest và model-lock.json</div>
+
+  <div data-object="true" data-object-type="shape" style="position:absolute;left:72px;top:996px;width:1776px;height:2px;background:#E3E7F1;z-index:1;"></div>
+  <div data-object="true" data-object-type="textbox" class="foot" style="position:absolute;left:72px;top:1014px;width:900px;z-index:10;">FPT School of Business &amp; Technology · VietTubeLens</div>
+  <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">12 / 18</div>
+</div>
+<template data-slide-notes>
+<p><strong>[~50 giây]</strong> Nhìn vào phân bố nhãn của 8.178 bình luận ở slide trước, một đặc điểm hiện ra rõ ràng: dữ liệu <strong>mất cân bằng</strong>.</p>
+<p>Về cảm xúc, tích cực chiếm 75,9%, tiêu cực 17,8%, trung lập chỉ 6,3%. Toxic chỉ 7,0%. Bình luận không liên quan chỉ 3,7%.</p>
+<p><em>[Nhấn giọng]</em> Vì vậy, nếu dùng accuracy, một mô hình luôn đoán “tích cực” cũng đạt gần 76%. Đó là lý do nhóm <strong>ưu tiên Macro-F1 và PR-AUC</strong>, vốn công bằng hơn với các lớp hiếm.</p>
+<p><strong>Animation cue:</strong> Thanh sentiment reveal trước theo từng series (Wipe 500 ms). Sau đó hai donut toxicity và relevance reveal (Wheel một lần, 500 ms). Không lặp.</p>
+</template>
+<script src="../assets/slide-runtime.js"></script></body></html>
+
+

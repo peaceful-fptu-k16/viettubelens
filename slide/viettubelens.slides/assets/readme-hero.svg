@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">VietTubeLens Signal Prism</title>
+  <desc id="desc">Animated brand banner with the VietTubeLens lens mark and community reaction panel.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#070B16"/><stop offset=".52" stop-color="#0B1020"/><stop offset="1" stop-color="#11182D"/>
+    </linearGradient>
+    <linearGradient id="prism" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7C5CFC"/><stop offset=".52" stop-color="#22D3EE"/><stop offset="1" stop-color="#A3E635"/>
+    </linearGradient>
+    <linearGradient id="sweepGradient"><stop stop-color="#7C5CFC" stop-opacity="0"/><stop offset=".5" stop-color="#22D3EE" stop-opacity=".7"/><stop offset="1" stop-color="#A3E635" stop-opacity="0"/></linearGradient>
+    <radialGradient id="violetGlow"><stop stop-color="#7C5CFC" stop-opacity=".3"/><stop offset="1" stop-color="#7C5CFC" stop-opacity="0"/></radialGradient>
+    <radialGradient id="cyanGlow"><stop stop-color="#22D3EE" stop-opacity=".22"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/></radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="32"/></filter>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dy="14" stdDeviation="18" flood-color="#02040A" flood-opacity=".65"/></filter>
+    <clipPath id="panel"><rect x="704" y="66" width="420" height="288" rx="24"/></clipPath>
+    <style>
+      .float{animation:float 5s cubic-bezier(.2,.8,.2,1) infinite;transform-box:fill-box;transform-origin:center}.pulse{animation:pulse 2.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}.orbit{animation:orbit 8s linear infinite;transform-box:fill-box;transform-origin:center}.sweep{animation:sweep 4.6s ease-in-out infinite}.b1,.b2,.b3{transform-box:fill-box;transform-origin:left center;animation:grow 4.6s cubic-bezier(.2,.9,.2,1) infinite}.b2{animation-delay:.12s}.b3{animation-delay:.24s}@keyframes float{50%{transform:translateY(-9px)}}@keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}@keyframes orbit{to{transform:rotate(360deg)}}@keyframes sweep{0%,18%{transform:translateX(-520px) skewX(-17deg);opacity:0}28%{opacity:.7}54%,100%{transform:translateX(520px) skewX(-17deg);opacity:0}}@keyframes grow{0%,12%,100%{transform:scaleX(.12)}28%,88%{transform:scaleX(1)}}@media(prefers-reduced-motion:reduce){.float,.pulse,.orbit,.sweep,.b1,.b2,.b3{animation:none!important}}
+    </style>
+  </defs>
+  <rect width="1200" height="420" rx="32" fill="url(#bg)"/>
+  <path d="M0 322C165 246 284 394 466 308S790 172 1200 284V420H0Z" fill="#7C5CFC" opacity=".035"/>
+  <path d="M0 364C220 286 340 420 574 330S922 226 1200 318V420H0Z" fill="#22D3EE" opacity=".025"/>
+  <circle cx="164" cy="84" r="190" fill="url(#violetGlow)" filter="url(#blur)"/><circle cx="1058" cy="330" r="230" fill="url(#cyanGlow)" filter="url(#blur)"/>
+  <g opacity=".16" stroke="#64748B"><path d="M44 42H1156M44 378H1156M44 42V378M1156 42V378"/><path stroke-dasharray="3 11" d="M600 42V378"/></g>
+  <g transform="translate(72 76)">
+    <g class="float">
+      <circle cx="54" cy="54" r="51" fill="#11182D" stroke="#273251"/><circle cx="54" cy="54" r="39" fill="none" stroke="url(#prism)" stroke-width="7" stroke-linecap="round" stroke-dasharray="184 62"/>
+      <path d="M87 84l6 28-24-16" fill="#11182D" stroke="#A3E635" stroke-width="5" stroke-linejoin="round"/><path d="m35 53 14 13 25-27" fill="none" stroke="#F8FAFC" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <g class="orbit"><circle cx="54" cy="-2" r="4" fill="#7C5CFC"/><circle cx="110" cy="54" r="4" fill="#22D3EE"/><circle cx="54" cy="110" r="4" fill="#A3E635"/></g>
+    </g>
+    <text x="136" y="30" fill="#A78BFA" font-family="Inter,Segoe UI,sans-serif" font-size="13" font-weight="700" letter-spacing="3">SIGNAL PRISM</text>
+    <text x="136" y="76" fill="#F8FAFC" font-family="Manrope,Segoe UI,sans-serif" font-size="38" font-weight="800">VietTubeLens</text>
+    <text x="136" y="110" fill="#94A3B8" font-family="Inter,Segoe UI,sans-serif" font-size="17">Community intelligence for Vietnamese YouTube</text>
+  </g>
+  <g transform="translate(76 236)">
+    <text fill="#F8FAFC" font-family="Manrope,Segoe UI,sans-serif" font-size="30" font-weight="750">Hiểu cộng đồng</text><text y="38" fill="url(#prism)" font-family="Manrope,Segoe UI,sans-serif" font-size="30" font-weight="750">trước khi xem.</text><text y="78" fill="#94A3B8" font-family="Inter,Segoe UI,sans-serif" font-size="15">Phản ứng · Độc hại · Confidence · Bằng chứng</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="704" y="66" width="420" height="288" rx="24" fill="#10172A" stroke="#293556"/>
+    <g clip-path="url(#panel)"><rect class="sweep" x="704" y="66" width="140" height="288" fill="url(#sweepGradient)" opacity="0"/><circle cx="1074" cy="76" r="104" fill="#22D3EE" opacity=".045"/></g>
+    <g transform="translate(730 88)"><circle cx="18" cy="18" r="17" fill="#7C5CFC" opacity=".17"/><circle cx="18" cy="18" r="10" fill="none" stroke="url(#prism)" stroke-width="3"/><path d="m13 18 4 4 7-8" fill="none" stroke="#F8FAFC" stroke-width="2.5" stroke-linecap="round"/><text x="48" y="14" fill="#F8FAFC" font-family="Manrope,Segoe UI,sans-serif" font-size="15" font-weight="750">VietTubeLens</text><text x="48" y="31" fill="#64748B" font-family="Inter,Segoe UI,sans-serif" font-size="10">Cập nhật vừa xong · cache hit</text><circle cx="354" cy="18" r="4" fill="#A3E635" class="pulse"/></g>
+    <g transform="translate(730 140)">
+      <circle cx="48" cy="48" r="42" fill="#0B1020" stroke="#293556" stroke-width="8"/><path d="M48 6a42 42 0 1 1-32 69" fill="none" stroke="url(#prism)" stroke-width="8" stroke-linecap="round" stroke-dasharray="215 264"/><text x="48" y="44" text-anchor="middle" fill="#F8FAFC" font-family="Manrope,Segoe UI,sans-serif" font-size="25" font-weight="800">79</text><text x="48" y="61" text-anchor="middle" fill="#94A3B8" font-family="Inter,Segoe UI,sans-serif" font-size="9">TIN CẬY</text>
+      <rect x="112" y="6" width="72" height="22" rx="11" fill="#14B8A6" opacity=".14"/><text x="148" y="21" text-anchor="middle" fill="#5EEAD4" font-family="Inter,Segoe UI,sans-serif" font-size="10" font-weight="700">TÍCH CỰC</text><text x="112" y="52" fill="#F8FAFC" font-family="Manrope,Segoe UI,sans-serif" font-size="22" font-weight="750">Phản ứng cộng đồng</text><text x="112" y="74" fill="#94A3B8" font-family="Inter,Segoe UI,sans-serif" font-size="11">24/30 bình luận phù hợp · độc hại 8%</text>
+    </g>
+    <g transform="translate(730 250)">
+      <rect width="350" height="8" rx="4" fill="#202A43"/><rect class="b1" width="200" height="8" rx="4" fill="#14B8A6"/><rect class="b2" x="204" width="80" height="8" fill="#64748B"/><rect class="b3" x="288" width="62" height="8" rx="4" fill="#F9738C"/>
+      <circle cx="4" cy="28" r="3" fill="#14B8A6"/><text x="12" y="32" fill="#94A3B8" font-family="Inter,Segoe UI,sans-serif" font-size="10">Tích cực 57%</text><circle cx="122" cy="28" r="3" fill="#64748B"/><text x="130" y="32" fill="#94A3B8" font-family="Inter,Segoe UI,sans-serif" font-size="10">Trung lập 23%</text><circle cx="248" cy="28" r="3" fill="#F9738C"/><text x="256" y="32" fill="#94A3B8" font-family="Inter,Segoe UI,sans-serif" font-size="10">Tiêu cực 20%</text>
+    </g>
+    <g transform="translate(896 324)"><rect width="194" height="44" rx="18" fill="#0B1020" stroke="#34415F"/><circle cx="24" cy="22" r="11" fill="#7C5CFC" opacity=".2"/><path d="m19 22 4 4 7-8" fill="none" stroke="#A78BFA" stroke-width="2.2" stroke-linecap="round"/><text x="43" y="19" fill="#F8FAFC" font-family="Inter,Segoe UI,sans-serif" font-size="11" font-weight="700">57% tích cực</text><text x="43" y="32" fill="#64748B" font-family="Inter,Segoe UI,sans-serif" font-size="8">confidence vừa</text><circle cx="173" cy="22" r="7" fill="none" stroke="#A3E635" stroke-width="2" stroke-dasharray="30 14"/></g>
+  </g>
+</svg>

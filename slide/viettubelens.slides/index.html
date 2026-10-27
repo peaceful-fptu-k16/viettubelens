@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B1020" />
+    <meta name="description" content="VietTubeLens — web presentation bảo vệ đồ án tại FPT School of Business & Technology" />
+    <title>VietTubeLens · Project Defense</title>
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/viewer.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <header class="chrome" id="chrome">
+        <a class="brand" href="#/1" aria-label="Về slide đầu tiên">
+          <img src="assets/logo.svg" alt="" />
+          <span><strong>VietTubeLens</strong><small>PROJECT DEFENSE</small></span>
+        </a>
+
+        <div class="slide-meta" aria-live="polite">
+          <span id="chapter">VietTubeLens</span>
+          <span class="counter"><b id="current-number">01</b><i>/</i><span id="total-number">18</span></span>
+        </div>
+
+        <nav class="toolbar" aria-label="Công cụ trình chiếu">
+          <button type="button" data-action="overview" aria-label="Mở tổng quan slide" title="Tổng quan (O)">
+            <svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg>
+          </button>
+          <button type="button" data-action="notes" aria-label="Mở ghi chú thuyết trình" title="Ghi chú (N)">
+            <svg viewBox="0 0 24 24"><path d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/></svg>
+          </button>
+          <button type="button" data-action="laser" aria-label="Bật con trỏ laser" title="Laser (L)">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/></svg>
+          </button>
+          <button type="button" data-action="motion" aria-label="Bật hoặc tắt chuyển động" title="Chuyển động (M)">
+            <svg viewBox="0 0 24 24"><path d="M4 12h3l2-5 4 10 2-5h5"/></svg>
+          </button>
+          <button type="button" data-action="replay" aria-label="Phát lại chuyển động của slide" title="Phát lại motion (R)">
+            <svg viewBox="0 0 24 24"><path d="M5 8V4m0 0h4M5 4l3.2 3.2A7 7 0 1 1 5.4 15"/></svg>
+          </button>
+          <button type="button" data-action="presenter" aria-label="Mở cửa sổ người thuyết trình" title="Presenter (P)">
+            <svg viewBox="0 0 24 24"><path d="M4 5h16v11H4zM9 20h6M12 16v4"/></svg>
+          </button>
+          <button type="button" data-action="fullscreen" aria-label="Toàn màn hình" title="Toàn màn hình (F)">
+            <svg viewBox="0 0 24 24"><path d="M8 4H4v4M16 4h4v4M20 16v4h-4M8 20H4v-4"/></svg>
+          </button>
+        </nav>
+      </header>
+
+      <main class="workspace">
+        <section class="stage-region" id="stage-region" aria-label="Slide hiện tại">
+          <div class="stage" id="stage">
+            <iframe id="slide-frame-a" class="slide-frame active" title="Slide VietTubeLens" loading="eager"></iframe>
+            <iframe id="slide-frame-b" class="slide-frame" title="Slide VietTubeLens chuyển tiếp" loading="eager"></iframe>
+            <div class="prism-wipe" aria-hidden="true"></div>
+            <div class="stage-corner stage-corner-a" aria-hidden="true"></div>
+            <div class="stage-corner stage-corner-b" aria-hidden="true"></div>
+          </div>
+          <button class="nav-hit nav-prev" data-action="prev" aria-label="Slide trước"></button>
+          <button class="nav-hit nav-next" data-action="next" aria-label="Slide tiếp theo"></button>
+          <div class="laser-dot" id="laser-dot" aria-hidden="true"></div>
+        </section>
+
+        <aside class="notes-panel" id="notes-panel" aria-label="Ghi chú thuyết trình" aria-hidden="true">
+          <div class="notes-head">
+            <div><small>SPEAKER NOTES</small><h2 id="notes-title">VietTubeLens</h2></div>
+            <div class="timer" id="timer"><span id="timer-value">00:00</span><button data-action="timer" type="button">Bắt đầu</button></div>
+          </div>
+          <div class="notes-content" id="notes-content"></div>
+          <div class="notes-next"><small>TIẾP THEO</small><strong id="next-title">Bối cảnh</strong></div>
+        </aside>
+      </main>
+
+      <footer class="deck-footer">
+        <div class="progress"><span id="progress-bar"></span><i style="left:22.22%"></i><i style="left:44.44%"></i><i style="left:55.56%"></i><i style="left:88.89%"></i></div>
+        <div class="hint"><kbd>←</kbd><kbd>→</kbd> điều hướng <span>·</span> <kbd>O</kbd> tổng quan <span>·</span> <kbd>F</kbd> toàn màn hình</div>
+        <div class="school">FPT School of Business &amp; Technology</div>
+      </footer>
+    </div>
+
+    <dialog class="overview" id="overview">
+      <div class="overview-head">
+        <div><small>18 SLIDE</small><h2>Tổng quan</h2></div>
+        <button type="button" data-action="close-overview" aria-label="Đóng tổng quan">Đóng <kbd>Esc</kbd></button>
+      </div>
+      <div class="overview-grid" id="overview-grid"></div>
+    </dialog>
+
+    <div class="help" id="help" role="dialog" aria-modal="true" aria-hidden="true">
+      <div class="help-card">
+        <small>PHÍM TẮT</small><h2>Điều khiển trình chiếu</h2>
+        <dl>
+          <div><dt><kbd>←</kbd> <kbd>→</kbd></dt><dd>Slide trước / tiếp theo</dd></div>
+          <div><dt><kbd>Home</kbd> <kbd>End</kbd></dt><dd>Về đầu / cuối deck</dd></div>
+          <div><dt><kbd>O</kbd></dt><dd>Mở tổng quan</dd></div>
+          <div><dt><kbd>N</kbd></dt><dd>Hiện speaker notes</dd></div>
+          <div><dt><kbd>P</kbd></dt><dd>Mở presenter window</dd></div>
+          <div><dt><kbd>F</kbd></dt><dd>Toàn màn hình</dd></div>
+          <div><dt><kbd>L</kbd></dt><dd>Bật laser pointer</dd></div>
+          <div><dt><kbd>M</kbd></dt><dd>Giảm chuyển động</dd></div>
+          <div><dt><kbd>R</kbd></dt><dd>Phát lại motion của slide</dd></div>
+        </dl>
+        <button type="button" data-action="close-help">Đã hiểu</button>
+      </div>
+    </div>
+
+    <script type="module" src="assets/viewer.js"></script>
+  </body>
+</html>

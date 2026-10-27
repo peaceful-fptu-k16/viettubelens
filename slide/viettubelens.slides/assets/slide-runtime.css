@@ -1,0 +1,17 @@
+@font-face{font-family:Inter;src:url("fonts/inter-latin.woff2") format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Inter;src:url("fonts/inter-vietnamese.woff2") format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:Manrope;src:url("fonts/manrope-latin.woff2") format("woff2");font-weight:200 800;font-display:swap}
+@font-face{font-family:Manrope;src:url("fonts/manrope-vietnamese.woff2") format("woff2");font-weight:200 800;font-display:swap}
+html{background:#f7f8fc}
+body{position:relative}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+.runtime-prism-sweep{position:fixed;left:-18%;top:-10%;width:12%;height:120%;z-index:9998;pointer-events:none;opacity:0;transform:skewX(-14deg);background:linear-gradient(90deg,transparent,rgba(124,92,252,.11),rgba(34,211,238,.18),rgba(163,230,53,.1),transparent)}
+.runtime-signal-dot{position:fixed;width:12px;height:12px;border-radius:50%;z-index:9997;pointer-events:none;opacity:0;background:#22d3ee;box-shadow:0 0 0 10px rgba(34,211,238,.08),0 0 28px rgba(34,211,238,.34)}
+.motion-title-accent{position:absolute;z-index:9;height:5px;border-radius:99px;transform-origin:left;background:linear-gradient(90deg,#7c5cfc,#22d3ee,#a3e635);pointer-events:none}
+.motion-flow-dot{position:absolute;width:14px;height:14px;border-radius:50%;z-index:30;pointer-events:none;opacity:0;background:currentColor;box-shadow:0 0 0 8px color-mix(in srgb,currentColor 14%,transparent)}
+.route-flow{stroke-dasharray:14 12}
+.flow-path{vector-effect:non-scaling-stroke}
+.reveal-target{will-change:transform,opacity}
+html.reduce-motion .runtime-prism-sweep,html.reduce-motion .runtime-signal-dot,html.reduce-motion .motion-title-accent{display:none!important}
+html.reduce-motion .motion-flow-dot{display:none!important}
+@media(prefers-reduced-motion:reduce){.runtime-prism-sweep,.runtime-signal-dot,.motion-title-accent,.motion-flow-dot{display:none!important}}

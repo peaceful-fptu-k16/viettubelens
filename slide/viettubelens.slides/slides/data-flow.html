@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><title>Luồng dữ liệu</title>
+<link rel="stylesheet" href="../assets/deck.css"><link rel="stylesheet" href="../assets/slide-runtime.css"></head>
+<body>
+<div class="slide-container" data-screen-label="10 Luồng dữ liệu" style="position:relative;width:1920px;height:1080px;overflow:hidden;background:#F7F8FC;">
+
+  <div data-object="true" data-object-type="textbox" class="kicker" style="position:absolute;left:72px;top:72px;width:700px;z-index:10;">Kỹ thuật</div>
+  <div data-object="true" data-object-type="textbox" class="title" style="position:absolute;left:72px;top:110px;width:900px;z-index:10;">Luồng dữ liệu</div>
+
+  <!-- main sequence -->
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:72px;top:250px;width:1776px;z-index:10;">
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:14px;">
+      <div class="story-card" style="height:138px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span class="stage-label" style="color:#7C5CFC;">01</span><span class="h" style="margin-top:8px;font-size:29px;font-weight:800;">Viewport</span><span style="margin-top:5px;font-size:23px;color:#5B6478;">≤ 12 video</span></div>
+      <div class="story-card" style="height:138px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span class="stage-label" style="color:#7C5CFC;">02</span><span class="h" style="margin-top:8px;font-size:29px;font-weight:800;">Extension</span><span style="margin-top:5px;font-size:23px;color:#5B6478;">bỏ livestream</span></div>
+      <div class="story-card" style="height:138px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span class="stage-label" style="color:#7C5CFC;">03</span><span class="h" style="margin-top:8px;font-size:29px;font-weight:800;">Batch API</span><span style="margin-top:5px;font-size:23px;color:#5B6478;">FastAPI</span></div>
+      <div style="height:138px;border-radius:20px;background:#0B1020;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 20px 42px -28px rgba(11,16,32,.8);"><span class="stage-label" style="color:#22D3EE;">04</span><span class="h" style="margin-top:8px;font-size:29px;font-weight:800;color:#fff;">Cache</span><span style="margin-top:5px;font-size:23px;color:#A5B0C8;">TTL 24 giờ</span></div>
+      <div class="story-card" style="height:138px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span class="stage-label" style="color:#0E8FA6;">05</span><span class="h" style="margin-top:8px;font-size:29px;font-weight:800;">Collector</span><span style="margin-top:5px;font-size:23px;color:#5B6478;">16 → 30</span></div>
+      <div class="story-card" style="height:138px;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span class="stage-label" style="color:#0E8FA6;">06</span><span class="h" style="margin-top:8px;font-size:29px;font-weight:800;">Model</span><span style="margin-top:5px;font-size:23px;color:#5B6478;">ONNX</span></div>
+      <div class="story-card" style="height:138px;border:2px solid #A3E635;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span class="stage-label" style="color:#5E8A12;">07</span><span class="h" style="margin-top:8px;font-size:29px;font-weight:800;">Badge</span><span style="margin-top:5px;font-size:23px;color:#5B6478;">cập nhật</span></div>
+    </div>
+  </div>
+  <div data-object="true" data-object-type="shape" class="flow-paths" style="position:absolute;left:72px;top:405px;width:1776px;height:34px;z-index:2;"><svg width="1776" height="34" viewBox="0 0 1776 34"><defs><marker id="seqArrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" fill="#7C5CFC"/></marker></defs><path data-flow-path="1" d="M40 17H1732" stroke="url(#seqG)" stroke-width="5" stroke-linecap="round" marker-end="url(#seqArrow)"/><defs><linearGradient id="seqG"><stop stop-color="#7C5CFC"/><stop offset=".58" stop-color="#22D3EE"/><stop offset="1" stop-color="#A3E635"/></linearGradient></defs></svg></div>
+
+  <!-- cache branches -->
+  <div data-object="true" data-object-type="textbox" data-sequence="5" class="story-card" style="position:absolute;left:72px;top:470px;width:852px;height:250px;padding:32px 38px;border:2px solid #B5EAF4;z-index:10;">
+    <div style="display:flex;align-items:center;justify-content:space-between;"><div><div class="stage-label" style="color:#0E8FA6;">Cache hit</div><div class="h" style="margin-top:12px;font-size:38px;font-weight:800;">Trả kết quả ngay</div></div><div class="h" style="font-size:76px;font-weight:800;color:#22D3EE;">↗</div></div>
+    <p style="margin-top:22px;font-size:27px;line-height:1.4;color:#5B6478;">Bỏ qua collector và model; badge nhận dữ liệu đã phân tích trong cache.</p>
+  </div>
+  <div data-object="true" data-object-type="textbox" data-sequence="6" class="story-card" style="position:absolute;left:996px;top:470px;width:852px;height:250px;padding:32px 38px;border:2px solid #D9D0FF;z-index:10;">
+    <div style="display:flex;align-items:center;justify-content:space-between;"><div><div class="stage-label" style="color:#7C5CFC;">Cache miss</div><div class="h" style="margin-top:12px;font-size:38px;font-weight:800;">Phân tích thích ứng</div></div><div class="h" style="font-size:76px;font-weight:800;color:#7C5CFC;">→</div></div>
+    <p style="margin-top:22px;font-size:27px;line-height:1.4;color:#5B6478;">Queued → lấy 16 bình luận → suy luận → mở rộng lên 30 khi confidence thấp.</p>
+  </div>
+
+  <!-- operating rules -->
+  <div data-object="true" data-object-type="textbox" data-sequence="7" style="position:absolute;left:72px;top:764px;width:1776px;z-index:10;">
+    <div class="stage-label" style="color:#64748B;">Quy tắc vận hành</div>
+    <div style="margin-top:18px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;">
+      <div class="story-card" style="height:104px;padding:20px 22px;"><b class="h" style="font-size:30px;color:#7C5CFC;">12 video</b><p style="margin-top:6px;font-size:22px;color:#5B6478;">trong vùng nhìn</p></div>
+      <div class="story-card" style="height:104px;padding:20px 22px;"><b class="h" style="font-size:30px;color:#0B1020;">Bỏ qua</b><p style="margin-top:6px;font-size:22px;color:#5B6478;">livestream</p></div>
+      <div class="story-card" style="height:104px;padding:20px 22px;"><b class="h" style="font-size:30px;color:#0E8FA6;">16 → 30</b><p style="margin-top:6px;font-size:22px;color:#5B6478;">bình luận thích ứng</p></div>
+      <div class="story-card" style="height:104px;padding:20px 22px;"><b class="h" style="font-size:30px;color:#5E8A12;">24 giờ</b><p style="margin-top:6px;font-size:22px;color:#5B6478;">TTL cache</p></div>
+      <div class="story-card" style="height:104px;padding:20px 22px;"><b class="h" style="font-size:30px;color:#B93FA6;">Backoff</b><p style="margin-top:6px;font-size:22px;color:#5B6478;">polling có kiểm soát</p></div>
+    </div>
+  </div>
+
+  <div data-object="true" data-object-type="shape" style="position:absolute;left:72px;top:996px;width:1776px;height:2px;background:#E3E7F1;z-index:1;"></div>
+  <div data-object="true" data-object-type="textbox" class="foot" style="position:absolute;left:72px;top:1014px;width:900px;z-index:10;">FPT School of Business &amp; Technology · VietTubeLens</div>
+  <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">10 / 18</div>
+</div>
+<template data-slide-notes>
+<p><strong>[~55 giây]</strong> Kiến trúc là bản đồ tĩnh; còn đây là một yêu cầu đi qua hệ thống theo thời gian.</p>
+<p>Extension chỉ xử lý <strong>tối đa 12 video</strong> đang hiện trong vùng nhìn và bỏ qua livestream. Batch API kiểm tra cache trước. Nếu <strong>cache hit</strong>, badge cập nhật ngay. Nếu <strong>cache miss</strong>, video vào hàng đợi: collector lấy <strong>16 bình luận</strong>, mô hình suy luận, và nếu confidence thấp thì mở rộng lên <strong>tối đa 30</strong>. Kết quả được cache <strong>24 giờ</strong>; extension polling với backoff để không spam server.</p>
+<p><strong>Animation cue:</strong> Chuỗi chính hiện trước. Click: nhánh cache hit (cyan) vẽ nhanh 300 ms. Click: nhánh cache miss (violet) vẽ chậm hơn 600 ms với một progress pulse duy nhất. Không loop.</p>
+</template>
+<script src="../assets/slide-runtime.js"></script></body></html>
+
+

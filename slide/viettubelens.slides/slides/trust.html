@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi"><head><meta charset="utf-8"><title>Độ tin cậy</title>
+<link rel="stylesheet" href="../assets/deck.css"><link rel="stylesheet" href="../assets/slide-runtime.css"></head>
+<body>
+<div class="slide-container" data-screen-label="16 Độ tin cậy" style="position:relative;width:1920px;height:1080px;overflow:hidden;background:#F7F8FC;">
+
+  <div data-object="true" data-object-type="textbox" class="kicker" style="position:absolute;left:72px;top:72px;width:700px;z-index:10;">Trách nhiệm</div>
+  <div data-object="true" data-object-type="textbox" class="title" style="position:absolute;left:72px;top:110px;width:760px;z-index:10;">Độ tin cậy</div>
+
+  <!-- confidence ring -->
+  <div data-object="true" data-object-type="chart" style="position:absolute;left:460px;top:330px;width:340px;height:340px;z-index:10;">
+    <svg width="340" height="340" viewBox="0 0 340 340" fill="none">
+      <defs><linearGradient id="cr" x1="0" y1="0" x2="340" y2="340" gradientUnits="userSpaceOnUse"><stop stop-color="#7C5CFC"/><stop offset=".52" stop-color="#22D3EE"/><stop offset="1" stop-color="#A3E635"/></linearGradient></defs>
+      <circle cx="170" cy="170" r="140" stroke="#E3E7F1" stroke-width="26"/>
+      <circle cx="170" cy="170" r="140" stroke="url(#cr)" stroke-width="26" stroke-linecap="round" stroke-dasharray="660 880" transform="rotate(-90 170 170)"/>
+      <text x="170" y="166" text-anchor="middle" font-family="Manrope,Arial" font-weight="800" font-size="34" letter-spacing="-1" fill="#0B1020">Confidence</text>
+      <text x="170" y="210" text-anchor="middle" font-family="Inter,Arial" font-size="24" fill="#5B6478">độ chắc chắn</text>
+    </svg>
+  </div>
+
+  <!-- principles around ring -->
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:72px;top:270px;width:380px;z-index:10;"><p class="h" style="font-size:32px;font-weight:700;line-height:1.2;color:#7C5CFC;">Evidence-first</p><p style="margin-top:8px;font-size:26px;line-height:1.35;color:#2A3247;">Luôn cung cấp bình luận đại diện.</p></div>
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:820px;top:270px;width:400px;z-index:10;"><p class="h" style="font-size:32px;font-weight:700;line-height:1.2;color:#7C5CFC;">Abstention</p><p style="margin-top:8px;font-size:26px;line-height:1.35;color:#2A3247;">Từ chối kết luận nếu dữ liệu không đủ.</p></div>
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:820px;top:600px;width:400px;z-index:10;"><p class="h" style="font-size:32px;font-weight:700;line-height:1.2;color:#7C5CFC;">Confidence</p><p style="margin-top:8px;font-size:26px;line-height:1.35;color:#2A3247;">Phản ánh độ chắc chắn, không phải chất lượng video.</p></div>
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:72px;top:600px;width:380px;z-index:10;"><p class="h" style="font-size:32px;font-weight:700;line-height:1.2;color:#7C5CFC;">Privacy</p><p style="margin-top:8px;font-size:26px;line-height:1.35;color:#2A3247;">API key chỉ ở backend, không lưu tên người bình luận.</p></div>
+
+  <!-- insufficient data example -->
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:72px;top:820px;width:1148px;height:110px;padding:0 26px;border-radius:999px;background:#FFFFFF;border:2px dashed #F59E0B;display:flex;align-items:center;gap:18px;z-index:10;">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9" stroke-dasharray="3 3"/><path d="M12 8v5M12 16v.01"/></svg>
+    <span class="h" style="font-size:30px;font-weight:700;color:#0B1020;">Chưa đủ dữ liệu</span>
+    <span style="font-size:26px;color:#5B6478;">· ví dụ badge khi hệ thống abstain</span>
+  </div>
+
+  <!-- limitations panel -->
+  <div data-object="true" data-object-type="shape" style="position:absolute;left:1290px;top:250px;width:558px;height:680px;border-radius:24px;background:#FFF8EB;border:1px solid #F7D9A0;z-index:1;"></div>
+  <div data-object="true" data-object-type="textbox" style="position:absolute;left:1326px;top:282px;width:490px;z-index:10;">
+    <p style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#B45309;line-height:1.2;">Giới hạn</p>
+    <ul style="margin-top:22px;display:flex;flex-direction:column;gap:18px;font-size:26px;line-height:1.35;color:#2A3247;">
+      <li>Chỉ lấy top-level comment theo relevance.</li>
+      <li>Tối đa 30 bình luận/video.</li>
+      <li>Không dùng dislike vì YouTube không công khai dữ liệu này.</li>
+      <li>Sarcasm và tiếng lóng mới vẫn có thể gây sai lệch.</li>
+      <li>Confidence dùng identity temperature; human calibration còn ở roadmap.</li>
+    </ul>
+  </div>
+
+  <div data-object="true" data-object-type="shape" style="position:absolute;left:72px;top:996px;width:1776px;height:2px;background:#E3E7F1;z-index:1;"></div>
+  <div data-object="true" data-object-type="textbox" class="foot" style="position:absolute;left:72px;top:1014px;width:900px;z-index:10;">FPT School of Business &amp; Technology · VietTubeLens</div>
+  <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">16 / 18</div>
+</div>
+<template data-slide-notes>
+<p><strong>[~60 giây]</strong> Vì các con số ở slide trước còn là silver, cách hệ thống thể hiện sự không chắc chắn càng quan trọng.</p>
+<p>Bốn nguyên tắc: <strong>evidence-first</strong> — luôn kèm bình luận đại diện; <strong>abstention</strong> — thiếu dữ liệu thì hiển thị “Chưa đủ dữ liệu” thay vì đoán; <strong>confidence</strong> — <em>[nhấn giọng]</em> phản ánh độ chắc chắn của mô hình, <strong>không phải video tốt hay xấu</strong>; và <strong>privacy</strong>.</p>
+<p>Nhóm cũng nói rõ giới hạn: chỉ top-level comment, tối đa 30 bình luận, không có dislike, sarcasm và tiếng lóng mới vẫn gây sai. Confidence hiện dùng identity temperature — tức chưa hiệu chỉnh — và human calibration nằm trong roadmap.</p>
+<p><strong>Animation cue:</strong> Confidence ring chạy một vòng rồi dừng (600 ms). Bốn nguyên tắc reveal theo chiều kim đồng hồ: Evidence → Abstention → Confidence → Privacy. Panel giới hạn (amber nhẹ) xuất hiện cuối.</p>
+</template>
+<script src="../assets/slide-runtime.js"></script></body></html>
+
+
