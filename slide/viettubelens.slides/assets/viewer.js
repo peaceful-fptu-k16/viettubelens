@@ -71,7 +71,7 @@ function update(nextIndex, { broadcast = true, initial = false } = {}) {
   const token = ++transitionToken;
   if (initial) {
     const frame = els.frames[activeSlot];
-    frame.src = `slides/${manifest.playlist[index]}?v=11`;
+    frame.src = `slides/${manifest.playlist[index]}?v=12`;
     frame.onload = () => { if (token !== transitionToken) return; fitStage(); signalFrame(frame, "vtl:replay"); };
     return;
   }
@@ -80,7 +80,7 @@ function update(nextIndex, { broadcast = true, initial = false } = {}) {
   const incomingSlot = activeSlot === 0 ? 1 : 0;
   const incoming = els.frames[incomingSlot];
   incoming.className = "slide-frame";
-  incoming.src = `slides/${manifest.playlist[index]}?v=11`;
+  incoming.src = `slides/${manifest.playlist[index]}?v=12`;
   incoming.onload = () => {
     if (token !== transitionToken) return;
     fitStage();
