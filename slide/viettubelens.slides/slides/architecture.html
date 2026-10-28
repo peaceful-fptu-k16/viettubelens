@@ -55,5 +55,11 @@
   <div data-object="true" data-object-type="textbox" class="foot" style="position:absolute;left:72px;top:1014px;width:900px;z-index:10;">FPT School of Business &amp; Technology · VietTubeLens</div>
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">09 / 18</div>
 </div>
-<template data-slide-notes><p><strong>[~55 giây]</strong> Kiến trúc được gom thành ba khối. Experience là lớp người dùng nhìn thấy; Service điều phối request và cache; Intelligence thu thập, suy luận và chọn evidence.</p><p>Request đi từ trái sang phải. Response quay lại theo chiều ngược lại. Khi cache hit, hệ thống dùng đường tắt SQLite → Extension → Badge.</p><p><strong>Animation cue:</strong> Ba khối reveal lần lượt. Request chạy trước, response chạy ngược lại, cache shortcut xuất hiện cuối.</p></template>
+<template data-slide-notes>
+<p class="note-time"><strong>06:30–07:25</strong><span>Kiến trúc</span></p>
+<p>Kiến trúc gồm ba lớp. Experience là YouTube và Chrome Extension. Service gồm FastAPI, hàng đợi và SQLite cache. Intelligence thu thập bình luận, chạy ViSoBERT rồi tổng hợp evidence.</p>
+<p>Request đi từ Extension sang backend và model. Response quay về theo chiều ngược lại để cập nhật badge. Nếu đã có cache, hệ thống dùng đường tắt từ SQLite về Extension, không thu thập và suy luận lại.</p>
+<p class="cue"><strong>Chỉ vào đường dưới:</strong> Cache hit là nhánh quyết định tốc độ cảm nhận của người dùng.</p>
+<p class="transition"><strong>Chuyển:</strong> Bây giờ hãy theo dõi một request cụ thể đi qua các bước này.</p>
+</template>
 <script src="../assets/slide-runtime.js?v=13"></script></body></html>

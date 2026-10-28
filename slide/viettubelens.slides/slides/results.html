@@ -58,11 +58,12 @@
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">15 / 18</div>
 </div>
 <template data-slide-notes>
-<p><strong>[~70 giây — slide quan trọng]</strong> Sau ba epoch huấn luyện, đây là kết quả.</p>
-<p>Bên trái: train loss giảm từ 0,305 xuống 0,089, và sentiment Macro-F1 tăng từ 0,526 lên 0,641. Bên phải là bốn chỉ số cuối: sentiment Macro-F1 <strong>0,641</strong>, toxicity Macro-F1 <strong>0,849</strong>, toxicity PR-AUC <strong>0,887</strong>, relevance Macro-F1 <strong>0,895</strong>.</p>
-<p><em>[Dừng lại, nhấn giọng rõ]</em> Nhóm cần nói thẳng: <strong>đây là kết quả trên silver-development set</strong> — nhãn được tạo từ pseudo-label và weak-supervision, chưa phải nhãn do con người gán. Vì vậy <strong>đây chưa phải gold accuracy chính thức</strong>, và nhóm không gọi các con số này là “độ chính xác”. Gold test do con người gán nhãn nằm trong lộ trình tiếp theo.</p>
-<p>Sentiment thấp nhất vì lớp trung lập chỉ chiếm 6,3% và khó phân biệt nhất.</p>
-<p><strong>Animation cue:</strong> Hai line chart vẽ từ E1 → E3 (Wipe 600 ms). Sau đó bốn KPI count-up một lần. Ghi chú silver (khung amber) xuất hiện cùng KPI — không ẩn.</p>
+<p class="note-time"><strong>11:50–13:00</strong><span>Kết quả quan trọng</span></p>
+<p>Bên trái, train loss giảm từ 0,305 xuống 0,089. Sentiment Macro-F1 tăng từ 0,526 lên 0,641 sau ba epoch.</p>
+<p>Bốn kết quả cuối là: sentiment Macro-F1 0,641; toxicity Macro-F1 0,849; toxicity PR-AUC 0,887; relevance Macro-F1 0,895.</p>
+<p class="cue"><strong>Dừng và nói rõ:</strong> Đây là kết quả trên silver development set, chưa phải gold test do con người gán nhãn. Vì vậy nhóm không gọi đây là độ chính xác chính thức.</p>
+<p>Sentiment là head khó nhất vì lớp trung lập chỉ chiếm 6,3% và dễ bị lẫn với phản hồi nhẹ hoặc không rõ thái độ.</p>
+<p class="transition"><strong>Chuyển:</strong> Ngoài metric, hệ thống còn cần cơ chế giúp người dùng hiểu và kiểm chứng kết luận.</p>
 </template>
 <script src="../assets/slide-runtime.js?v=13"></script></body></html>
 

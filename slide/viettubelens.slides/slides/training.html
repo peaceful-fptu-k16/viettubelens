@@ -44,5 +44,11 @@
   <div data-object="true" data-object-type="textbox" class="foot" style="position:absolute;left:72px;top:1014px;width:900px;z-index:10;">FPT School of Business &amp; Technology · VietTubeLens</div>
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">14 / 18</div>
 </div>
-<template data-slide-notes><p><strong>[~50 giây]</strong> Pipeline có bốn bước: chuẩn bị dữ liệu, tạo và rà soát nhãn, fine-tune ViSoBERT theo channel split, rồi verify ONNX trước khi đưa vào FastAPI.</p><p><strong>Animation cue:</strong> Bốn bước reveal trái sang phải. Khối Fine-tune được nhấn mạnh, sau đó dải thông số xuất hiện.</p></template>
+<template data-slide-notes>
+<p class="note-time"><strong>11:00–11:50</strong><span>Huấn luyện</span></p>
+<p>Pipeline bắt đầu bằng thu thập và khử trùng lặp. Sau đó nhóm tạo pseudo-label, rà soát lại nhãn và chia dữ liệu theo channel.</p>
+<p>ViSoBERT được fine-tune trong 3 epoch, learning rate 2e-5, effective batch size 32 và max length 192. Sau huấn luyện, nhóm đối chiếu đầu ra PyTorch với ONNX rồi tích hợp artifact vào FastAPI.</p>
+<p class="cue"><strong>Nhấn:</strong> ONNX là định dạng triển khai thực tế của backend, không chỉ là file xuất dự phòng.</p>
+<p class="transition"><strong>Chuyển:</strong> Kết quả development cho thấy loss giảm và các head đạt mức hiệu quả khác nhau.</p>
+</template>
 <script src="../assets/slide-runtime.js?v=13"></script></body></html>

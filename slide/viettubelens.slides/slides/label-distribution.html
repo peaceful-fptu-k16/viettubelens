@@ -66,10 +66,11 @@
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">12 / 18</div>
 </div>
 <template data-slide-notes>
-<p><strong>[~50 giây]</strong> Nhìn vào phân bố nhãn của 8.178 bình luận ở slide trước, một đặc điểm hiện ra rõ ràng: dữ liệu <strong>mất cân bằng</strong>.</p>
-<p>Về cảm xúc, tích cực chiếm 75,9%, tiêu cực 17,8%, trung lập chỉ 6,3%. Toxic chỉ 7,0%. Bình luận không liên quan chỉ 3,7%.</p>
-<p><em>[Nhấn giọng]</em> Vì vậy, nếu dùng accuracy, một mô hình luôn đoán “tích cực” cũng đạt gần 76%. Đó là lý do nhóm <strong>ưu tiên Macro-F1 và PR-AUC</strong>, vốn công bằng hơn với các lớp hiếm.</p>
-<p><strong>Animation cue:</strong> Thanh sentiment reveal trước theo từng series (Wipe 500 ms). Sau đó hai donut toxicity và relevance reveal (Wheel một lần, 500 ms). Không lặp.</p>
+<p class="note-time"><strong>09:15–10:05</strong><span>Phân bố nhãn</span></p>
+<p>Sentiment tích cực chiếm 75,9%, tiêu cực 17,8% và trung lập 6,3%. Toxicity chỉ có 7% mẫu toxic. Relevance chỉ có 3,7% bình luận không liên quan.</p>
+<p>Nếu dùng accuracy, model luôn dự đoán lớp chiếm đa số vẫn có thể đạt điểm cao nhưng không hữu ích với lớp hiếm.</p>
+<p class="cue"><strong>Nhấn:</strong> Nhóm ưu tiên Macro-F1 cho sentiment, toxicity và relevance; PR-AUC được dùng thêm cho toxicity.</p>
+<p class="transition"><strong>Chuyển:</strong> Ba nhóm nhãn này dẫn tới kiến trúc multi-task của ViSoBERT.</p>
 </template>
 <script src="../assets/slide-runtime.js?v=13"></script></body></html>
 

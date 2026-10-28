@@ -48,9 +48,11 @@
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">10 / 18</div>
 </div>
 <template data-slide-notes>
-<p><strong>[~55 giây]</strong> Kiến trúc là bản đồ tĩnh; còn đây là một yêu cầu đi qua hệ thống theo thời gian.</p>
-<p>Extension chỉ xử lý <strong>tối đa 12 video</strong> đang hiện trong vùng nhìn và bỏ qua livestream. Batch API kiểm tra cache trước. Nếu <strong>cache hit</strong>, badge cập nhật ngay. Nếu <strong>cache miss</strong>, video vào hàng đợi: collector lấy <strong>16 bình luận</strong>, mô hình suy luận, và nếu confidence thấp thì mở rộng lên <strong>tối đa 30</strong>. Kết quả được cache <strong>24 giờ</strong>; extension polling với backoff để không spam server.</p>
-<p><strong>Animation cue:</strong> Chuỗi chính hiện trước. Click: nhánh cache hit (cyan) vẽ nhanh 300 ms. Click: nhánh cache miss (violet) vẽ chậm hơn 600 ms với một progress pulse duy nhất. Không loop.</p>
+<p class="note-time"><strong>07:25–08:20</strong><span>Luồng dữ liệu</span></p>
+<p>Extension theo dõi tối đa 12 video trong vùng nhìn và bỏ qua livestream. Batch API luôn kiểm tra cache trước.</p>
+<p>Với cache hit, kết quả quay lại badge ngay. Với cache miss, video vào hàng đợi. Collector lấy 16 bình luận ban đầu, model suy luận và mở rộng lên tối đa 30 bình luận nếu confidence thấp. Kết quả được cache trong 24 giờ.</p>
+<p class="cue"><strong>Nhấn:</strong> Polling dùng backoff để tránh gửi request liên tục khi người dùng cuộn lên xuống.</p>
+<p class="transition"><strong>Chuyển:</strong> Sau luồng hệ thống, phần tiếp theo tập trung vào dữ liệu dùng để huấn luyện model.</p>
 </template>
 <script src="../assets/slide-runtime.js?v=13"></script></body></html>
 

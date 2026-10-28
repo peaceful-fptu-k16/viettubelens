@@ -6,7 +6,7 @@ const els = {
   frames: [document.querySelector("#slide-frame-a"), document.querySelector("#slide-frame-b")],
   stage: document.querySelector("#stage"), stageRegion: document.querySelector("#stage-region"),
   current: document.querySelector("#current-number"), total: document.querySelector("#total-number"), chapter: document.querySelector("#chapter"), progress: document.querySelector("#progress-bar"),
-  notesPanel: document.querySelector("#notes-panel"), notesTitle: document.querySelector("#notes-title"), notesContent: document.querySelector("#notes-content"), nextTitle: document.querySelector("#next-title"),
+  notesPanel: document.querySelector("#notes-panel"), notesTitle: document.querySelector("#notes-title"), notesContent: document.querySelector("#notes-content"), nextTitle: document.querySelector("#next-title"), nextTitleCompact: document.querySelector("#next-title-compact"), nextPreview: document.querySelector("#next-preview"),
   overview: document.querySelector("#overview"), overviewGrid: document.querySelector("#overview-grid"), help: document.querySelector("#help"), laser: document.querySelector("#laser-dot"),
   timerValue: document.querySelector("#timer-value"), timerButton: document.querySelector("[data-action='timer']")
 };
@@ -14,7 +14,10 @@ const els = {
 let index = Math.max(0, Math.min(manifest.playlist.length - 1, Number(location.hash.match(/\d+/)?.[0] || 1) - 1));
 let activeSlot = 0;
 let transitionToken = 0;
-let notesOpen = new URLSearchParams(location.search).has("presenter");
+const searchParams = new URLSearchParams(location.search);
+const presenterMode = searchParams.has("presenter");
+const audienceMode = searchParams.has("audience");
+let notesOpen = presenterMode;
 let laserActive = false;
 let reducedMotion = localStorage.getItem("vtl-reduced-motion") === "1" || matchMedia("(prefers-reduced-motion: reduce)").matches;
 let startX = 0;
@@ -24,7 +27,8 @@ let focusTimer = 0;
 const channel = "BroadcastChannel" in window ? new BroadcastChannel("viettubelens-slides") : null;
 
 els.total.textContent = String(manifest.playlist.length).padStart(2, "0");
-if (notesOpen) els.app.classList.add("presenter");
+if (presenterMode) els.app.classList.add("presenter");
+if (audienceMode) els.app.classList.add("audience");
 
 function fitStage() {
   const scale = els.stage.clientWidth / 1920;
@@ -32,11 +36,15 @@ function fitStage() {
 }
 
 async function loadNotes(i) {
-  const html = await fetch(`slides/${manifest.playlist[i]}`).then((r) => r.text());
+  const html = await fetch(`slides/${manifest.playlist[i]}?v=13`).then((r) => r.text());
   const doc = new DOMParser().parseFromString(html, "text/html");
   els.notesContent.innerHTML = doc.querySelector("template[data-slide-notes]")?.innerHTML || "<p>Không có ghi chú cho slide này.</p>";
   els.notesTitle.textContent = prettyTitles[i];
-  els.nextTitle.textContent = prettyTitles[Math.min(i + 1, prettyTitles.length - 1)];
+  const nextIndex = Math.min(i + 1, prettyTitles.length - 1);
+  els.nextTitle.textContent = prettyTitles[nextIndex];
+  els.nextTitleCompact.textContent = prettyTitles[nextIndex];
+  els.nextPreview.src = `assets/thumbs/${manifest.playlist[nextIndex].replace(".html", ".png")}`;
+  els.nextPreview.alt = `Xem trước slide ${nextIndex + 1}: ${prettyTitles[nextIndex]}`;
 }
 
 function signalFrame(frame, type) {
@@ -71,7 +79,7 @@ function update(nextIndex, { broadcast = true, initial = false } = {}) {
   const token = ++transitionToken;
   if (initial) {
     const frame = els.frames[activeSlot];
-    frame.src = `slides/${manifest.playlist[index]}?v=12`;
+    frame.src = `slides/${manifest.playlist[index]}?v=13`;
     frame.onload = () => { if (token !== transitionToken) return; fitStage(); signalFrame(frame, "vtl:replay"); };
     return;
   }
@@ -80,7 +88,7 @@ function update(nextIndex, { broadcast = true, initial = false } = {}) {
   const incomingSlot = activeSlot === 0 ? 1 : 0;
   const incoming = els.frames[incomingSlot];
   incoming.className = "slide-frame";
-  incoming.src = `slides/${manifest.playlist[index]}?v=12`;
+  incoming.src = `slides/${manifest.playlist[index]}?v=13`;
   incoming.onload = () => {
     if (token !== transitionToken) return;
     fitStage();
@@ -127,7 +135,8 @@ function toggleMotion() {
   reducedMotion = !reducedMotion; localStorage.setItem("vtl-reduced-motion", reducedMotion ? "1" : "0"); applyMotionSetting(); replayMotion();
 }
 async function toggleFullscreen() { document.fullscreenElement ? await document.exitFullscreen() : await document.documentElement.requestFullscreen(); }
-function openPresenter() { window.open(`${location.pathname}?presenter=1#/` + (index + 1), "viettubelens-presenter", "popup,width=1440,height=900"); }
+function openPresenter() { window.open(`${location.pathname}?presenter=1&v=16#/` + (index + 1), "viettubelens-presenter", "popup,width=1440,height=900"); }
+function openAudience() { window.open(`${location.pathname}?audience=1&v=16#/` + (index + 1), "viettubelens-audience"); }
 function toggleTimer() {
   if (timerInterval) { clearInterval(timerInterval); timerInterval = 0; els.timerButton.textContent = "Tiếp tục"; return; }
   timerStart = timerStart ? Date.now() - Number(els.timerValue.dataset.elapsed || 0) : Date.now();
@@ -151,7 +160,7 @@ manifest.playlist.forEach((file, i) => {
 
 document.addEventListener("click", (event) => {
   const action = event.target.closest("[data-action]")?.dataset.action;
-  ({prev:()=>navigate(-1),next:()=>navigate(1),overview:toggleOverview,"close-overview":()=>els.overview.close(),notes:()=>toggleNotes(),laser:toggleLaser,motion:toggleMotion,replay:replayMotion,presenter:openPresenter,fullscreen:toggleFullscreen,timer:toggleTimer,"close-help":()=>showHelp(false)})[action]?.();
+  ({prev:()=>navigate(-1),next:()=>navigate(1),overview:toggleOverview,"close-overview":()=>els.overview.close(),notes:()=>toggleNotes(),laser:toggleLaser,motion:toggleMotion,replay:replayMotion,presenter:openPresenter,audience:openAudience,fullscreen:toggleFullscreen,timer:toggleTimer,"close-help":()=>showHelp(false)})[action]?.();
 });
 document.addEventListener("keydown", (event) => {
   if (event.target.matches("input,textarea,select")) return;
@@ -173,4 +182,4 @@ document.addEventListener("fullscreenchange", wakeChrome); document.addEventList
 channel?.addEventListener("message", (event) => { if (event.data?.type === "navigate" && event.data.index !== index) update(event.data.index, { broadcast:false }); });
 
 toggleNotes(notesOpen); applyMotionSetting(); update(index, {broadcast:false, initial:true}); fitStage();
-if (!sessionStorage.getItem("vtl-help-seen") && !notesOpen) { window.setTimeout(() => showHelp(true), 650); sessionStorage.setItem("vtl-help-seen", "1"); }
+if (!sessionStorage.getItem("vtl-help-seen") && !notesOpen && !audienceMode) { window.setTimeout(() => showHelp(true), 650); sessionStorage.setItem("vtl-help-seen", "1"); }

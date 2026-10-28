@@ -7,7 +7,7 @@
     <meta name="description" content="VietTubeLens — web presentation bảo vệ đồ án tại FPT School of Business & Technology" />
     <title>VietTubeLens · Project Defense</title>
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/viewer.css?v=11" />
+    <link rel="stylesheet" href="assets/viewer.css?v=14" />
   </head>
   <body>
     <div class="app" id="app">
@@ -38,7 +38,7 @@
           <button type="button" data-action="replay" aria-label="Phát lại chuyển động của slide" title="Phát lại motion (R)">
             <svg viewBox="0 0 24 24"><path d="M5 8V4m0 0h4M5 4l3.2 3.2A7 7 0 1 1 5.4 15"/></svg>
           </button>
-          <button type="button" data-action="presenter" aria-label="Mở cửa sổ người thuyết trình" title="Presenter (P)">
+          <button type="button" data-action="presenter" aria-label="Mở màn điều khiển người thuyết trình" title="Màn điều khiển (P)">
             <svg viewBox="0 0 24 24"><path d="M4 5h16v11H4zM9 20h6M12 16v4"/></svg>
           </button>
           <button type="button" data-action="fullscreen" aria-label="Toàn màn hình" title="Toàn màn hình (F)">
@@ -66,8 +66,18 @@
             <div><small>SPEAKER NOTES</small><h2 id="notes-title">VietTubeLens</h2></div>
             <div class="timer" id="timer"><span id="timer-value">00:00</span><button data-action="timer" type="button">Bắt đầu</button></div>
           </div>
+          <div class="presenter-status"><span></span>Đồng bộ trực tiếp với màn trình chiếu</div>
           <div class="notes-content" id="notes-content"></div>
-          <div class="notes-next"><small>TIẾP THEO</small><strong id="next-title">Bối cảnh</strong></div>
+          <div class="presenter-preview">
+            <div class="preview-label"><small>SLIDE KẾ TIẾP</small><strong id="next-title">Bối cảnh</strong></div>
+            <img id="next-preview" src="assets/thumbs/context.png" alt="Xem trước slide kế tiếp" />
+          </div>
+          <div class="notes-next"><small>TIẾP THEO</small><strong id="next-title-compact">Bối cảnh</strong></div>
+          <div class="presenter-controls">
+            <button type="button" data-action="prev">← Trước</button>
+            <button type="button" data-action="next" class="primary">Tiếp theo →</button>
+            <button type="button" data-action="audience">Mở màn trình chiếu</button>
+          </div>
         </aside>
       </main>
 
@@ -94,7 +104,7 @@
           <div><dt><kbd>Home</kbd> <kbd>End</kbd></dt><dd>Về đầu / cuối deck</dd></div>
           <div><dt><kbd>O</kbd></dt><dd>Mở tổng quan</dd></div>
           <div><dt><kbd>N</kbd></dt><dd>Hiện speaker notes</dd></div>
-          <div><dt><kbd>P</kbd></dt><dd>Mở presenter window</dd></div>
+          <div><dt><kbd>P</kbd></dt><dd>Mở màn điều khiển</dd></div>
           <div><dt><kbd>F</kbd></dt><dd>Toàn màn hình</dd></div>
           <div><dt><kbd>L</kbd></dt><dd>Bật laser pointer</dd></div>
           <div><dt><kbd>M</kbd></dt><dd>Giảm chuyển động</dd></div>
@@ -104,6 +114,6 @@
       </div>
     </div>
 
-    <script type="module" src="assets/viewer.js?v=14"></script>
+    <script type="module" src="assets/viewer.js?v=17"></script>
   </body>
 </html>

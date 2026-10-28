@@ -50,10 +50,11 @@
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">08 / 18</div>
 </div>
 <template data-slide-notes>
-<p><strong>[~45 giây]</strong> Giao diện đẹp ở trạng thái Ready là chưa đủ. Nhóm thiết kế đầy đủ sáu trạng thái.</p>
-<p>Hàng trên là luồng bình thường: <strong>Loading</strong>, <strong>Queued</strong> khi cache chưa có, và <strong>Ready</strong>. Hàng dưới là các trường hợp hệ thống <em>[nhấn giọng]</em> <strong>chủ động không kết luận</strong>: thiếu dữ liệu, bình luận bị tắt, hoặc backend lỗi.</p>
-<p>Thông điệp chính: <strong>một công cụ đáng tin là công cụ biết khi nào nên im lặng.</strong> Điều này sẽ quay lại ở phần độ tin cậy.</p>
-<p><strong>Animation cue:</strong> Reveal theo ba nhóm — (1) Loading, Queued + mũi tên; (2) Ready; (3) hàng từ chối/lỗi. Skeleton shimmer chạy một chu kỳ rồi dừng. Fade 300–400 ms.</p>
+<p class="note-time"><strong>05:45–06:30</strong><span>Trạng thái</span></p>
+<p>Hàng trên là luồng xử lý bình thường: Loading, Queued và Ready. Hàng dưới là ba tình huống không thể kết luận: dữ liệu chưa đủ, bình luận không khả dụng hoặc backend lỗi.</p>
+<p>Mỗi trạng thái có nhãn chữ và màu semantic riêng. Extension không dùng một trạng thái lỗi chung cho mọi trường hợp, vì người dùng cần biết họ nên chờ, thử lại hay chấp nhận rằng video không có dữ liệu.</p>
+<p class="cue"><strong>Nhấn:</strong> Hệ thống đáng tin phải biết khi nào không nên đưa ra kết luận.</p>
+<p class="transition"><strong>Chuyển:</strong> Phần tiếp theo cho thấy ba lớp kỹ thuật tạo ra trải nghiệm này.</p>
 </template>
 <script src="../assets/slide-runtime.js?v=13"></script></body></html>
 

@@ -46,11 +46,11 @@
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">11 / 18</div>
 </div>
 <template data-slide-notes>
-<p><strong>[~55 giây]</strong> Sau phần hệ thống, chúng ta chuyển sang “bộ não”: dữ liệu và mô hình.</p>
-<p>Nhóm xây dựng tập <strong>8.178 bình luận</strong> sau khi khử trùng lặp, từ <strong>130 video</strong>, <strong>95 channel</strong>, trải trên <strong>16 nhóm chủ đề</strong>.</p>
-<p><em>[Nhấn giọng]</em> Điểm quan trọng là cách chia: <strong>chia theo channel</strong>, không chia ngẫu nhiên theo bình luận. Train có 7.633 mẫu từ 85 channel, development 545 mẫu từ 10 channel hoàn toàn khác. Nhờ vậy mô hình không “học thuộc” phong cách của một channel rồi được đánh giá trên chính channel đó.</p>
-<p>Về quyền riêng tư: không lưu tên tác giả, ID được pseudonymize, và dữ liệu thật không đưa lên Git.</p>
-<p><strong>Animation cue:</strong> KPI count-up một lần (600 ms). Thanh split mở trái → phải (Wipe 500 ms). Privacy note fade-in cuối.</p>
+<p class="note-time"><strong>08:20–09:15</strong><span>Dữ liệu</span></p>
+<p>Bộ dữ liệu có 8.178 bình luận sau khử trùng lặp, lấy từ 130 video, 95 channel và 16 nhóm chủ đề.</p>
+<p>Train gồm 7.633 mẫu từ 85 channel. Development gồm 545 mẫu từ 10 channel khác. Nhóm chia theo channel để model không được đánh giá trên cùng phong cách nội dung mà nó đã thấy khi huấn luyện.</p>
+<p class="cue"><strong>Nhấn:</strong> Không lưu tên tác giả. ID bình luận được pseudonymize và dữ liệu YouTube thật không được commit lên Git.</p>
+<p class="transition"><strong>Chuyển:</strong> Cách phân bố nhãn cho thấy vì sao accuracy không phải metric phù hợp nhất.</p>
 </template>
 <script src="../assets/slide-runtime.js?v=13"></script></body></html>
 
