@@ -6,24 +6,29 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;overflow:hidden;background:#F7F8FC}
 body{font-family:Inter,'Be Vietnam Pro',Arial,sans-serif;color:#0B1020;-webkit-font-smoothing:antialiased}
+.slide-container{isolation:isolate}
+.slide-container:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(circle at 87% 8%,rgba(34,211,238,.08),transparent 23%),radial-gradient(circle at 70% 100%,rgba(124,92,252,.055),transparent 28%),linear-gradient(rgba(11,16,32,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(11,16,32,.018) 1px,transparent 1px);background-size:auto,auto,64px 64px,64px 64px;mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.82) 62%,transparent 96%)}
 p,h1,h2,h3,ul,li{margin:0;padding:0}
 p,h1,h2,h3,li,span{overflow-wrap:normal;word-break:normal}
 p,h1,h2,h3{white-space:normal;text-wrap:pretty}
 li > span:last-child{text-wrap:balance}
 ul{list-style:none}
 .h{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif}
-.kicker{font-family:Inter,'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:26px;line-height:1.2;letter-spacing:.16em;text-transform:uppercase;color:#7C5CFC}
-.title{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:800;font-size:64px;line-height:1.15;letter-spacing:-.02em;color:#0B1020}
+.kicker{font-family:Inter,'Be Vietnam Pro',Arial,sans-serif;font-weight:750;font-size:24px;line-height:1.2;letter-spacing:.17em;text-transform:uppercase;color:#7C5CFC;display:flex;align-items:center;gap:12px}
+.kicker:before{content:"";width:14px;height:14px;flex:0 0 14px;border-radius:5px;background:linear-gradient(135deg,#7C5CFC,#22D3EE 62%,#A3E635);box-shadow:0 0 0 5px rgba(124,92,252,.08)}
+.title{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:800;font-size:66px;line-height:1.12;letter-spacing:-.028em;color:#0B1020;text-wrap:balance}
 .lead{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:46px;line-height:1.22;letter-spacing:-.01em;color:#0B1020}
 .body{font-size:34px;line-height:1.35;color:#2A3247}
 .cap{font-size:28px;line-height:1.35;color:#5B6478}
-.foot{font-size:26px;line-height:1.2;color:#64748B;font-weight:500}
-.src{font-size:26px;line-height:1.2;color:#64748B;font-style:italic;text-align:right}
-.pg{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:26px;line-height:1.2;color:#0B1020;text-align:right}
+.foot{font-size:24px;line-height:1.2;color:#7A8498;font-weight:550;letter-spacing:.01em}
+.src{font-size:23px;line-height:1.2;color:#7A8498;font-style:italic;text-align:right}
+.pg{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:800;font-size:24px;line-height:1.2;color:#7C5CFC;text-align:right;font-variant-numeric:tabular-nums}
 .mono{font-family:'JetBrains Mono',Consolas,'Courier New',monospace}
 .prism-text{background:linear-gradient(90deg,#7C5CFC,#22D3EE 55%,#A3E635);-webkit-background-clip:text;background-clip:text;color:transparent}
 .t34{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-weight:700;font-size:34px;line-height:1.25;color:#0B1020}
-.story-card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 18px 44px -32px rgba(11,16,32,.28)}
+.story-card,.surface-card{background-color:#fff;background-image:linear-gradient(145deg,rgba(255,255,255,.98),rgba(248,250,255,.94));border-color:rgba(203,210,225,.82);box-shadow:0 20px 46px -34px rgba(11,16,32,.36),inset 0 1px 0 rgba(255,255,255,.9)}
+.story-card{border:1px solid var(--line);border-radius:20px}
+.ink-panel{box-shadow:0 24px 54px -34px rgba(11,16,32,.78),inset 0 1px 0 rgba(255,255,255,.07)}
 .stage-label{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-size:24px;font-weight:800;letter-spacing:.11em;text-transform:uppercase}
 .fit-text{min-width:0;max-width:100%;white-space:normal;text-wrap:pretty}
 .metric-value{font-family:Manrope,'Be Vietnam Pro',Arial,sans-serif;font-variant-numeric:tabular-nums lining-nums}

@@ -1,73 +1,54 @@
 <!DOCTYPE html>
 <html lang="vi"><head><meta charset="utf-8"><title>Lộ trình</title>
-<link rel="stylesheet" href="../assets/deck.css"><link rel="stylesheet" href="../assets/slide-runtime.css"></head>
+<link rel="stylesheet" href="../assets/deck.css?v=11"><link rel="stylesheet" href="../assets/slide-runtime.css"></head>
 <body>
 <div class="slide-container" data-screen-label="17 Lộ trình" style="position:relative;width:1920px;height:1080px;overflow:hidden;background:#F7F8FC;">
+  <div data-object="true" data-object-type="textbox" class="kicker" style="position:absolute;left:72px;top:72px;width:700px;z-index:10;">Từ prototype đến sản phẩm</div>
+  <div data-object="true" data-object-type="textbox" class="title" style="position:absolute;left:72px;top:110px;width:900px;z-index:10;">Lộ trình</div>
 
-  <div data-object="true" data-object-type="textbox" class="kicker" style="position:absolute;left:72px;top:72px;width:700px;z-index:10;">Tiếp theo</div>
-  <div data-object="true" data-object-type="textbox" class="title" style="position:absolute;left:72px;top:110px;width:760px;z-index:10;">Lộ trình</div>
-
-  <!-- timeline -->
-  <div data-object="true" data-object-type="shape" style="position:absolute;left:72px;top:290px;width:1776px;height:60px;z-index:1;">
-    <svg width="1776" height="60" viewBox="0 0 1776 60" fill="none">
-      <defs><linearGradient id="rt" x1="0" y1="0" x2="1776" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#7C5CFC"/><stop offset=".52" stop-color="#22D3EE"/><stop offset="1" stop-color="#A3E635"/></linearGradient></defs>
-      <line x1="30" y1="30" x2="1746" y2="30" stroke="url(#rt)" stroke-width="6" stroke-linecap="round"/>
-      <circle cx="30" cy="30" r="22" fill="#7C5CFC"/>
-      <path d="M20 30l7 7 13-14" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="636" cy="30" r="22" fill="#FFFFFF" stroke="#22D3EE" stroke-width="6"/>
-      <circle cx="1242" cy="30" r="22" fill="#FFFFFF" stroke="#A3E635" stroke-width="6"/>
-    </svg>
+  <div data-object="true" data-object-type="shape" data-sequence="1" style="position:absolute;left:124px;top:265px;width:1672px;height:42px;z-index:3;">
+    <svg width="1672" height="42" viewBox="0 0 1672 42" fill="none"><defs><linearGradient id="route" x1="0" y1="0" x2="1672" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#7C5CFC"/><stop offset=".5" stop-color="#22D3EE"/><stop offset="1" stop-color="#A3E635"/></linearGradient></defs><path d="M18 21H1654" stroke="#DCE2EE" stroke-width="7" stroke-linecap="round"/><path d="M18 21H835" stroke="url(#route)" stroke-width="7" stroke-linecap="round"/><circle cx="18" cy="21" r="15" fill="#7C5CFC"/><path d="m11 21 5 5 10-11" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="836" cy="21" r="18" fill="#fff" stroke="#22D3EE" stroke-width="7"/><circle cx="1654" cy="21" r="15" fill="#fff" stroke="#A3E635" stroke-width="6"/></svg>
   </div>
 
-  <!-- phase 1 -->
-  <div data-object="true" data-object-type="textbox" style="position:absolute;left:72px;top:380px;width:560px;z-index:10;">
-    <p style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#7C5CFC;line-height:1.2;">Đã hoàn thành</p>
-    <ul style="margin-top:24px;display:flex;flex-direction:column;gap:16px;font-size:28px;line-height:1.3;color:#2A3247;">
-      <li style="display:flex;gap:14px;"><span style="color:#7C5CFC;font-weight:700;">✓</span>Signal Prism design system</li>
-      <li style="display:flex;gap:14px;"><span style="color:#7C5CFC;font-weight:700;">✓</span>Badge, popover và popup</li>
-      <li style="display:flex;gap:14px;"><span style="color:#7C5CFC;font-weight:700;">✓</span>Scheduler tối đa 12 video</li>
-      <li style="display:flex;gap:14px;"><span style="color:#7C5CFC;font-weight:700;">✓</span>Cache-first, adaptive inference</li>
-      <li style="display:flex;gap:14px;"><span style="color:#7C5CFC;font-weight:700;">✓</span>Fine-tuned multi-task ViSoBERT</li>
-      <li style="display:flex;gap:14px;"><span style="color:#7C5CFC;font-weight:700;">✓</span>ONNX tích hợp backend</li>
-    </ul>
+  <div data-object="true" data-object-type="textbox" data-sequence="2" class="story-card" style="position:absolute;left:72px;top:335px;width:536px;height:500px;padding:38px 40px;border:1px solid #D8CFFF;z-index:10;">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;"><div><p class="stage-label" style="color:#7C5CFC;">01 · Foundation</p><p class="h" style="margin-top:16px;font-size:39px;font-weight:800;">Đã hoàn thành</p></div><span class="h" style="font-size:72px;line-height:.9;color:#E6E0FF;">01</span></div>
+    <div style="margin-top:38px;display:grid;gap:22px;font-size:27px;line-height:1.3;color:#30394D;">
+      <p><b style="color:#7C5CFC;">✓</b>&nbsp; Signal Prism &amp; product UI</p>
+      <p><b style="color:#7C5CFC;">✓</b>&nbsp; Scheduler 12 video, cache-first</p>
+      <p><b style="color:#7C5CFC;">✓</b>&nbsp; ViSoBERT multi-task</p>
+      <p><b style="color:#7C5CFC;">✓</b>&nbsp; ONNX tích hợp backend</p>
+    </div>
+    <div style="position:absolute;left:40px;right:40px;bottom:34px;height:7px;border-radius:99px;background:#ECE8FF;"><span style="display:block;width:100%;height:100%;border-radius:99px;background:#7C5CFC;"></span></div>
   </div>
 
-  <!-- phase 2 -->
-  <div data-object="true" data-object-type="textbox" style="position:absolute;left:678px;top:380px;width:560px;z-index:10;">
-    <p style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#0E8FA6;line-height:1.2;">Tiếp theo</p>
-    <ul style="margin-top:24px;display:flex;flex-direction:column;gap:16px;font-size:28px;line-height:1.3;color:#2A3247;">
-      <li style="display:flex;gap:14px;"><span style="color:#22D3EE;font-weight:700;">○</span>Human-labelled validation, gold test</li>
-      <li style="display:flex;gap:14px;"><span style="color:#22D3EE;font-weight:700;">○</span>Temperature calibration</li>
-      <li style="display:flex;gap:14px;"><span style="color:#22D3EE;font-weight:700;">○</span>Threshold, abstention tuning</li>
-      <li style="display:flex;gap:14px;"><span style="color:#22D3EE;font-weight:700;">○</span>Visual regression light/dark</li>
-      <li style="display:flex;gap:14px;"><span style="color:#22D3EE;font-weight:700;">○</span>Benchmark GPU ONNX</li>
-    </ul>
+  <div data-object="true" data-object-type="textbox" data-sequence="3" style="position:absolute;left:692px;top:315px;width:536px;height:540px;padding:38px 40px;border-radius:28px;background:#0B1020;color:#fff;box-shadow:0 26px 60px rgba(11,16,32,.18);overflow:hidden;z-index:12;">
+    <div style="position:absolute;right:-40px;top:-70px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.22),transparent 68%);"></div>
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;position:relative;"><div><p class="stage-label" style="color:#50E4F5;">02 · Validation</p><p class="h" style="margin-top:16px;font-size:39px;font-weight:800;color:#fff;">Tiếp theo</p></div><span class="h" style="font-size:72px;line-height:.9;color:#25304A;">02</span></div>
+    <div style="margin-top:38px;display:grid;gap:22px;font-size:27px;line-height:1.3;color:#D6DCEC;position:relative;">
+      <p><b style="color:#22D3EE;">→</b>&nbsp; Human-labelled gold test</p>
+      <p><b style="color:#22D3EE;">→</b>&nbsp; Temperature calibration</p>
+      <p><b style="color:#22D3EE;">→</b>&nbsp; Threshold &amp; abstention tuning</p>
+      <p><b style="color:#22D3EE;">→</b>&nbsp; Visual &amp; performance benchmark</p>
+    </div>
+    <div style="position:absolute;left:40px;right:40px;bottom:34px;height:7px;border-radius:99px;background:#263149;"><span style="display:block;width:28%;height:100%;border-radius:99px;background:linear-gradient(90deg,#7C5CFC,#22D3EE);"></span></div>
   </div>
 
-  <!-- phase 3 -->
-  <div data-object="true" data-object-type="textbox" style="position:absolute;left:1284px;top:380px;width:564px;z-index:10;">
-    <p style="font-size:24px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#5E8A12;line-height:1.2;">Production</p>
-    <ul style="margin-top:24px;display:flex;flex-direction:column;gap:16px;font-size:28px;line-height:1.3;color:#2A3247;">
-      <li style="display:flex;gap:14px;"><span style="color:#84B820;font-weight:700;">○</span>Chrome Web Store</li>
-      <li style="display:flex;gap:14px;"><span style="color:#84B820;font-weight:700;">○</span>Authentication, rate limiting</li>
-      <li style="display:flex;gap:14px;"><span style="color:#84B820;font-weight:700;">○</span>Persistent queue/cache</li>
-      <li style="display:flex;gap:14px;"><span style="color:#84B820;font-weight:700;">○</span>Privacy policy, monitoring</li>
-    </ul>
+  <div data-object="true" data-object-type="textbox" data-sequence="4" class="story-card" style="position:absolute;left:1312px;top:335px;width:536px;height:500px;padding:38px 40px;border:1px solid #D9ECAF;z-index:10;">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;"><div><p class="stage-label" style="color:#608A12;">03 · Scale</p><p class="h" style="margin-top:16px;font-size:39px;font-weight:800;">Production</p></div><span class="h" style="font-size:72px;line-height:.9;color:#E7F2CE;">03</span></div>
+    <div style="margin-top:38px;display:grid;gap:22px;font-size:27px;line-height:1.3;color:#30394D;">
+      <p><b style="color:#78A91B;">○</b>&nbsp; Chrome Web Store</p>
+      <p><b style="color:#78A91B;">○</b>&nbsp; Authentication &amp; rate limit</p>
+      <p><b style="color:#78A91B;">○</b>&nbsp; Persistent queue/cache</p>
+      <p><b style="color:#78A91B;">○</b>&nbsp; Privacy policy &amp; monitoring</p>
+    </div>
+    <div style="position:absolute;left:40px;right:40px;bottom:34px;height:7px;border-radius:99px;background:#EDF3DF;"></div>
   </div>
 
-  <img data-object="true" data-object-type="image" src="../assets/logo.svg" alt="Signal Prism logo" style="position:absolute;left:1748px;top:860px;width:100px;height:100px;z-index:5;">
+  <div data-object="true" data-object-type="textbox" data-sequence="5" style="position:absolute;left:388px;top:894px;width:1144px;height:74px;border-radius:999px;border:1px solid #CDEFF4;background:#EFFBFC;display:flex;align-items:center;justify-content:center;gap:22px;z-index:10;"><span class="stage-label" style="color:#0E8FA6;">Ưu tiên kế tiếp</span><span style="width:1px;height:30px;background:#B9E4EA;"></span><b class="h" style="font-size:29px;">Human-labelled gold validation</b></div>
 
   <div data-object="true" data-object-type="shape" style="position:absolute;left:72px;top:996px;width:1776px;height:2px;background:#E3E7F1;z-index:1;"></div>
   <div data-object="true" data-object-type="textbox" class="foot" style="position:absolute;left:72px;top:1014px;width:900px;z-index:10;">FPT School of Business &amp; Technology · VietTubeLens</div>
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">17 / 18</div>
 </div>
-<template data-slide-notes>
-<p><strong>[~50 giây]</strong> Những giới hạn vừa nêu chính là đầu vào cho lộ trình.</p>
-<p><strong>Đã hoàn thành</strong>: design system, ba thành phần giao diện, scheduler 12 video, cache-first và adaptive inference, mô hình đa nhiệm và ONNX tích hợp backend.</p>
-<p><em>[Nhấn giọng]</em> Ưu tiên số một ở giai đoạn <strong>tiếp theo</strong> là <strong>gold test do con người gán nhãn</strong> — để thay silver bằng số liệu chính thức — cùng temperature calibration và tinh chỉnh ngưỡng abstain.</p>
-<p>Giai đoạn <strong>production</strong>: phát hành Chrome Web Store, authentication, rate limiting, hàng đợi và cache bền vững, privacy policy và monitoring.</p>
-<p><strong>Animation cue:</strong> Timeline vẽ qua ba giai đoạn (Wipe 600 ms). Dấu check của mốc hoàn thành xuất hiện một lần. Node Production sáng nhẹ rồi dừng. Logo góc phải dưới là điểm Morph sang slide Cảm ơn.</p>
-</template>
-<script src="../assets/slide-runtime.js"></script></body></html>
-
-
+<template data-slide-notes><p><strong>[~50 giây]</strong> Từ các giới hạn vừa nêu, lộ trình được thu gọn thành ba chặng có tiêu chí đầu ra rõ ràng.</p><p><strong>Foundation</strong> đã hoàn thành: trải nghiệm sản phẩm, scheduler, cache-first, mô hình đa nhiệm và ONNX backend.</p><p><em>[Nhấn giọng]</em> Hiện tại trọng tâm là <strong>Validation</strong>. Ưu tiên số một là gold test do con người gán nhãn, sau đó mới calibration và tinh chỉnh ngưỡng abstain.</p><p>Khi chất lượng đã được xác nhận, chặng <strong>Scale</strong> mới đưa hệ thống lên Chrome Web Store với authentication, rate limit, persistent queue/cache và monitoring.</p><p><strong>Animation cue:</strong> Vẽ progress line trước; ba phase reveal lần lượt. Card Validation nổi bật bằng Morph nhẹ. Pill ưu tiên xuất hiện cuối.</p></template>
+<script src="../assets/slide-runtime.js?v=13"></script></body></html>

@@ -25,7 +25,7 @@ function numberParts(text) {
   return null;
 }
 
-function countUp(node, delay = 420, duration = 620) {
+function countUp(node, delay = 60, duration = 480) {
   const parsed = numberParts(node.textContent); if (!parsed) return;
   const original = node.textContent.trim(); const token = countToken;
   const start = performance.now() + delay;
@@ -39,6 +39,11 @@ function countUp(node, delay = 420, duration = 620) {
     if (progress < 1) requestAnimationFrame(step); else node.textContent = original;
   };
   requestAnimationFrame(step);
+}
+
+function playCounts() {
+  countToken += 1;
+  container?.querySelectorAll("[data-count]").forEach((node,index) => countUp(node,40 + index * 45,500));
 }
 
 function animateSvg(chart, delay) {
@@ -112,6 +117,11 @@ function createAccent(title) {
 function play() {
   if (!container) return;
   cancelAll();
+  container.querySelectorAll('[data-object="true"]').forEach((node) => {
+    const style = node.getAttribute("style") || "";
+    if (/background:\s*#fff(?:fff)?/i.test(style) && /border-radius/i.test(style)) node.classList.add("surface-card");
+    if (/background:\s*#0b1020/i.test(style) && /border-radius/i.test(style)) node.classList.add("ink-panel");
+  });
   const objects = [...container.querySelectorAll(":scope > [data-object='true']")];
   if (reduced()) { objects.forEach((node) => { node.style.opacity = ""; node.style.transform = ""; node.style.clipPath = ""; }); return; }
 
@@ -125,9 +135,9 @@ function play() {
     const type = node.dataset.objectType;
     const rect = node.getBoundingClientRect();
     const area = rect.width * rect.height;
-    let delay = 180 + Math.min(order, 14) * 48;
-    if (node.dataset.sequence) delay = 180 + Number(node.dataset.sequence) * 150;
-    if (processSlides.has(slideNumber)) delay = 220 + Math.round((rect.left / 1920) * 520) + Math.round((rect.top / 1080) * 100);
+    let delay = 120 + Math.min(order, 14) * 34;
+    if (node.dataset.sequence) delay = 120 + Number(node.dataset.sequence) * 90;
+    if (processSlides.has(slideNumber)) delay = 130 + Math.round((rect.left / 1920) * 320) + Math.round((rect.top / 1080) * 60);
     if (node === kicker) delay = 30;
     if (node === title) delay = 80;
 
@@ -142,17 +152,13 @@ function play() {
     else animate(node,[{opacity:0,transform:"translateY(12px)"},{opacity:1,transform:"translateY(0)"}],{duration:470,delay});
   });
 
-  container.querySelectorAll("li,table tr").forEach((node, i) => animate(node,[{opacity:0,transform:"translateX(-10px)"},{opacity:1,transform:"translateX(0)"}],{duration:360,delay:300+i*55}));
+  container.querySelectorAll("li,table tr").forEach((node, i) => animate(node,[{opacity:0,transform:"translateX(-10px)"},{opacity:1,transform:"translateX(0)"}],{duration:340,delay:200+i*40}));
   container.querySelectorAll('[style*="display:grid"]').forEach((grid) => {
     const children = [...grid.children].filter((node) => node.tagName !== "STYLE" && node.tagName !== "SCRIPT");
     if (children.length < 3) return;
-    children.forEach((node,index) => animate(node,[{opacity:0,transform:"translateY(16px) scale(.985)"},{opacity:1,transform:"translateY(0) scale(1)"}],{duration:430,delay:480+index*120}));
+    children.forEach((node,index) => animate(node,[{opacity:0,transform:"translateY(14px) scale(.99)"},{opacity:1,transform:"translateY(0) scale(1)"}],{duration:360,delay:220+index*65}));
   });
-  container.querySelectorAll("*").forEach((node) => {
-    const size = Number.parseFloat(getComputedStyle(node).fontSize);
-    if (size >= 60 && numberParts(node.textContent) && node.children.length === 0 && !node.dataset.count) countUp(node,460,680);
-  });
-  container.querySelectorAll("[data-count]").forEach((node,index) => countUp(node,420 + index * 120,760));
+  playCounts();
 
   playStoryFlow();
   if (slideNumber === 9) playArchitectureRoutes();
@@ -170,6 +176,7 @@ function play() {
 addEventListener("message", (event) => {
   if (event.data?.type === "vtl:motion") { root.classList.toggle("reduce-motion", !!event.data.reducedMotion); if (event.data.reducedMotion) cancelAll(); }
   if (event.data?.type === "vtl:replay") { root.classList.toggle("reduce-motion", !!event.data.reducedMotion); play(); }
+  if (event.data?.type === "vtl:counts" && !reduced()) playCounts();
 });
 
 if (document.readyState === "loading") addEventListener("DOMContentLoaded", () => requestAnimationFrame(play)); else requestAnimationFrame(play);

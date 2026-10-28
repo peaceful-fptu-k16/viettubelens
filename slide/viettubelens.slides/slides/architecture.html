@@ -1,85 +1,59 @@
 <!DOCTYPE html>
 <html lang="vi"><head><meta charset="utf-8"><title>Kiến trúc</title>
-<link rel="stylesheet" href="../assets/deck.css"><link rel="stylesheet" href="../assets/slide-runtime.css"></head>
+<link rel="stylesheet" href="../assets/deck.css?v=11"><link rel="stylesheet" href="../assets/slide-runtime.css"></head>
 <body>
 <div class="slide-container" data-screen-label="09 Kiến trúc" style="position:relative;width:1920px;height:1080px;overflow:hidden;background:#F7F8FC;">
   <div data-object="true" data-object-type="textbox" class="kicker" style="position:absolute;left:72px;top:72px;width:700px;z-index:10;">Kỹ thuật</div>
   <div data-object="true" data-object-type="textbox" class="title" style="position:absolute;left:72px;top:110px;width:760px;z-index:10;">Kiến trúc</div>
-  <div data-object="true" data-object-type="textbox" style="position:absolute;left:760px;top:132px;width:1088px;text-align:right;font-size:27px;line-height:1.35;color:#5B6478;z-index:10;">Hai chiều dữ liệu · một vòng phản hồi khép kín</div>
 
-  <div data-object="true" data-object-type="textbox" data-sequence="1" style="position:absolute;left:72px;top:236px;width:644px;height:54px;display:flex;align-items:center;gap:16px;z-index:10;">
-    <span style="height:38px;padding:7px 16px;border-radius:999px;background:#EFEBFF;color:#7C5CFC;font-size:22px;font-weight:800;letter-spacing:.11em;">EXPERIENCE</span><span style="font-size:23px;color:#64748B;">Quan sát trên YouTube</span>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="2" style="position:absolute;left:776px;top:236px;width:338px;height:54px;display:flex;align-items:center;z-index:10;">
-    <span style="height:38px;padding:7px 16px;border-radius:999px;background:#E4F8FC;color:#0E8FA6;font-size:22px;font-weight:800;letter-spacing:.11em;">SERVICE</span>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="3" style="position:absolute;left:1174px;top:236px;width:674px;height:54px;display:flex;align-items:center;gap:16px;z-index:10;">
-    <span style="height:38px;padding:7px 16px;border-radius:999px;background:#F0F9E2;color:#5E8A12;font-size:22px;font-weight:800;letter-spacing:.11em;">INTELLIGENCE</span><span style="font-size:23px;color:#64748B;">Thu thập · suy luận · tổng hợp</span>
-  </div>
-
-  <div data-object="true" data-object-type="textbox" data-route-label="request" style="position:absolute;left:72px;top:304px;width:250px;font-size:21px;font-weight:800;letter-spacing:.16em;color:#7C5CFC;z-index:10;">REQUEST →</div>
-  <div data-object="true" data-object-type="textbox" data-route-label="response" style="position:absolute;left:1598px;top:594px;width:250px;text-align:right;font-size:21px;font-weight:800;letter-spacing:.16em;color:#0E8FA6;z-index:10;">← RESULT</div>
-
-  <div data-object="true" data-object-type="shape" class="flow-paths" style="position:absolute;left:72px;top:330px;width:1776px;height:500px;z-index:2;">
-    <svg width="1776" height="500" viewBox="0 0 1776 500" fill="none">
+  <div data-object="true" data-object-type="shape" class="flow-paths" style="position:absolute;left:72px;top:232px;width:1776px;height:650px;z-index:3;">
+    <svg width="1776" height="650" viewBox="0 0 1776 650" fill="none">
       <defs>
-        <marker id="reqArrow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1L11 6L1 11z" fill="#7C5CFC"/></marker>
-        <marker id="resArrow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1 1L11 6L1 11z" fill="#22D3EE"/></marker>
+        <linearGradient id="req" x1="0" y1="0" x2="1776" y2="0"><stop stop-color="#7C5CFC"/><stop offset=".55" stop-color="#22D3EE"/><stop offset="1" stop-color="#A3E635"/></linearGradient>
+        <marker id="arrowReq" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" fill="#7C5CFC"/></marker>
+        <marker id="arrowRes" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0L9 4.5L0 9z" fill="#22D3EE"/></marker>
       </defs>
-      <path data-route="request" class="route-flow" d="M300 86H344" stroke="#7C5CFC" stroke-width="4" stroke-linecap="round" marker-end="url(#reqArrow)"/>
-      <path data-route="request" class="route-flow" d="M644 86H738" stroke="#7C5CFC" stroke-width="4" stroke-linecap="round" marker-end="url(#reqArrow)"/>
-      <path data-route="request" class="route-flow" d="M1038 86H1132" stroke="#7C5CFC" stroke-width="4" stroke-linecap="round" marker-end="url(#reqArrow)"/>
-      <path data-route="request" class="route-flow" d="M1432 86H1476" stroke="#7C5CFC" stroke-width="4" stroke-linecap="round" marker-end="url(#reqArrow)"/>
-      <path data-route="response" class="route-flow" d="M1626 176V286" stroke="#22D3EE" stroke-width="4" stroke-linecap="round" marker-end="url(#resArrow)"/>
-      <path data-route="response" class="route-flow" d="M1476 376H1432" stroke="#22D3EE" stroke-width="4" stroke-linecap="round" marker-end="url(#resArrow)"/>
-      <path data-route="response" class="route-flow" d="M1132 376H1038" stroke="#22D3EE" stroke-width="4" stroke-linecap="round" marker-end="url(#resArrow)"/>
-      <path data-route="response" class="route-flow" d="M738 376C560 376 520 376 300 376" stroke="#22D3EE" stroke-width="4" stroke-linecap="round" marker-end="url(#resArrow)"/>
+      <path data-route="request" d="M510 250H630" stroke="#7C5CFC" stroke-width="4" stroke-linecap="round" marker-end="url(#arrowReq)"/>
+      <path data-route="request" d="M1146 250H1266" stroke="#7C5CFC" stroke-width="4" stroke-linecap="round" marker-end="url(#arrowReq)"/>
+      <path data-route="response" d="M1266 505H1146" stroke="#22D3EE" stroke-width="4" stroke-linecap="round" marker-end="url(#arrowRes)"/>
+      <path data-route="response" d="M630 505H510" stroke="#22D3EE" stroke-width="4" stroke-linecap="round" marker-end="url(#arrowRes)"/>
     </svg>
   </div>
 
-  <div data-object="true" data-object-type="textbox" data-sequence="1" class="story-card" style="position:absolute;left:72px;top:326px;width:300px;height:180px;padding:24px 26px;border:2px solid #D9D0FF;z-index:10;">
-    <div style="display:flex;align-items:center;justify-content:space-between;"><span class="stage-label" style="color:#7C5CFC;">01 · Input</span><span style="width:34px;height:34px;border-radius:10px;background:#EFEBFF;display:grid;place-items:center;color:#7C5CFC;font-weight:800;">▶</span></div>
-    <p class="h" style="margin-top:16px;font-size:30px;font-weight:800;">YouTube cards</p><p style="margin-top:6px;font-size:23px;color:#5B6478;">Feed · search · related</p>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="2" class="story-card" style="position:absolute;left:416px;top:326px;width:300px;height:180px;padding:24px 26px;border:2px solid #D9D0FF;z-index:10;">
-    <div class="stage-label" style="color:#7C5CFC;">02 · Observe</div><p class="h" style="margin-top:16px;font-size:30px;font-weight:800;">Chrome Extension</p><p style="margin-top:6px;font-size:23px;color:#5B6478;">Viewport · batch client</p>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="3" style="position:absolute;left:810px;top:326px;width:300px;height:180px;padding:28px;border-radius:22px;background:#0B1020;box-shadow:0 24px 50px -30px rgba(11,16,32,.8);z-index:10;">
-    <div class="stage-label" style="color:#22D3EE;">03 · Route</div><p class="h" style="margin-top:18px;font-size:32px;font-weight:800;color:#fff;">FastAPI</p><p style="margin-top:7px;font-size:23px;color:#A5B0C8;">Batch API · queue</p>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="4" class="story-card" style="position:absolute;left:1204px;top:326px;width:300px;height:180px;padding:24px 26px;border:2px solid #D2EBAE;z-index:10;">
-    <div class="stage-label" style="color:#5E8A12;">04 · Collect</div><p class="h" style="margin-top:16px;font-size:30px;font-weight:800;">Collector</p><p style="margin-top:6px;font-size:23px;color:#5B6478;">YouTube Data API</p>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="5" class="story-card" style="position:absolute;left:1548px;top:326px;width:300px;height:180px;padding:24px 26px;border:2px solid #D2EBAE;z-index:10;">
-    <div class="stage-label" style="color:#5E8A12;">05 · Infer</div><p class="h" style="margin-top:16px;font-size:30px;font-weight:800;">ViSoBERT</p><p style="margin-top:6px;font-size:23px;color:#5B6478;">Multi-task · ONNX</p>
-  </div>
+  <div data-object="true" data-object-type="textbox" data-route-label="request" style="position:absolute;left:806px;top:248px;width:308px;text-align:center;font-size:21px;font-weight:800;letter-spacing:.14em;color:#7C5CFC;z-index:10;">REQUEST →</div>
+  <div data-object="true" data-object-type="textbox" data-route-label="response" style="position:absolute;left:806px;top:826px;width:308px;text-align:center;font-size:21px;font-weight:800;letter-spacing:.14em;color:#0E8FA6;z-index:10;">← RESPONSE</div>
 
-  <div data-object="true" data-object-type="textbox" data-sequence="9" class="story-card" style="position:absolute;left:72px;top:616px;width:300px;height:180px;padding:24px 26px;border:2px solid #B5EAF4;z-index:10;">
-    <div class="stage-label" style="color:#0E8FA6;">09 · Show</div><p class="h" style="margin-top:16px;font-size:30px;font-weight:800;">Badge + popover</p><p style="margin-top:6px;font-size:23px;color:#5B6478;">Ngay trên YouTube</p>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="8" class="story-card" style="position:absolute;left:810px;top:616px;width:300px;height:180px;padding:24px 26px;border:2px solid #B5EAF4;z-index:10;">
-    <div class="stage-label" style="color:#0E8FA6;">08 · Cache</div><p class="h" style="margin-top:16px;font-size:30px;font-weight:800;">SQLite</p><p style="margin-top:6px;font-size:23px;color:#5B6478;">Kết quả · TTL 24 giờ</p>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="7" class="story-card" style="position:absolute;left:1204px;top:616px;width:300px;height:180px;padding:24px 26px;border:2px solid #B5EAF4;z-index:10;">
-    <div class="stage-label" style="color:#0E8FA6;">07 · Aggregate</div><p class="h" style="margin-top:16px;font-size:30px;font-weight:800;">Video reaction</p><p style="margin-top:6px;font-size:23px;color:#5B6478;">Relevance-aware</p>
-  </div>
-  <div data-object="true" data-object-type="textbox" data-sequence="6" class="story-card" style="position:absolute;left:1548px;top:616px;width:300px;height:180px;padding:24px 26px;border:2px solid #B5EAF4;z-index:10;">
-    <div class="stage-label" style="color:#0E8FA6;">06 · Explain</div><p class="h" style="margin-top:16px;font-size:30px;font-weight:800;">Scores + evidence</p><p style="margin-top:6px;font-size:23px;color:#5B6478;">Confidence · MMR</p>
-  </div>
+  <section data-object="true" data-object-type="textbox" data-sequence="1" style="position:absolute;left:72px;top:298px;width:510px;height:500px;padding:34px;border-radius:28px;background:#F0EDFF;border:1px solid #D8D0FF;z-index:10;">
+    <div style="display:flex;align-items:center;justify-content:space-between;"><span class="stage-label" style="color:#7C5CFC;">01 · Experience</span><span class="h" style="font-size:56px;font-weight:800;color:#D8D0FF;">UI</span></div>
+    <div style="margin-top:34px;display:grid;gap:18px;">
+      <div style="height:132px;padding:25px 28px;border-radius:18px;background:#fff;border:1px solid #DCD5FF;"><p class="h" style="font-size:32px;font-weight:800;">YouTube</p><p style="margin-top:8px;font-size:23px;color:#64748B;">Home · Search · Related</p></div>
+      <div style="height:168px;padding:25px 28px;border-radius:18px;background:#fff;border:1px solid #DCD5FF;"><p class="h" style="font-size:32px;font-weight:800;">Chrome Extension</p><p style="margin-top:8px;font-size:23px;color:#64748B;">Badge · Popover · Scheduler</p><div style="margin-top:22px;width:100%;height:6px;border-radius:99px;background:linear-gradient(90deg,#7C5CFC,#22D3EE);"></div></div>
+    </div>
+  </section>
 
-  <div data-object="true" data-object-type="textbox" data-sequence="10" style="position:absolute;left:72px;top:842px;width:1776px;height:72px;padding:0 24px;border-radius:18px;background:#EDF9FB;border:1px solid #B5EAF4;display:flex;align-items:center;justify-content:space-between;z-index:10;">
-    <div style="display:flex;align-items:center;gap:18px;"><span style="width:18px;height:18px;border-radius:50%;background:#22D3EE;box-shadow:0 0 0 7px rgba(34,211,238,.12);"></span><b class="h" style="font-size:27px;color:#0B1020;">Cache hit</b><span style="font-size:25px;color:#5B6478;">bỏ qua thu thập và suy luận</span></div>
-    <div class="h" style="font-size:26px;font-weight:800;color:#0E8FA6;">SQLite → Extension → Badge</div>
-  </div>
+  <section data-object="true" data-object-type="textbox" data-sequence="2" style="position:absolute;left:706px;top:298px;width:510px;height:500px;padding:34px;border-radius:28px;background:#0B1020;color:#fff;box-shadow:0 26px 60px rgba(11,16,32,.2);overflow:hidden;z-index:12;">
+    <div style="position:absolute;right:-80px;top:-100px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(34,211,238,.22),transparent 68%);"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;position:relative;"><span class="stage-label" style="color:#4FE3F4;">02 · Service</span><span class="h" style="font-size:56px;font-weight:800;color:#26324F;">API</span></div>
+    <div style="margin-top:34px;display:grid;gap:18px;position:relative;">
+      <div style="height:168px;padding:25px 28px;border-radius:18px;background:#171E31;border:1px solid #2E3A58;"><p class="h" style="font-size:32px;font-weight:800;color:#fff;">FastAPI</p><p style="margin-top:8px;font-size:23px;color:#AEB8CF;">Batch API · Inference queue</p><div style="margin-top:22px;width:100%;height:6px;border-radius:99px;background:linear-gradient(90deg,#7C5CFC,#22D3EE);"></div></div>
+      <div style="height:132px;padding:25px 28px;border-radius:18px;background:#171E31;border:1px solid #2E3A58;"><p class="h" style="font-size:32px;font-weight:800;color:#fff;">SQLite Cache</p><p style="margin-top:8px;font-size:23px;color:#AEB8CF;">TTL 24 giờ</p></div>
+    </div>
+  </section>
+
+  <section data-object="true" data-object-type="textbox" data-sequence="3" style="position:absolute;left:1340px;top:298px;width:508px;height:500px;padding:34px;border-radius:28px;background:#F3F9E8;border:1px solid #DCECB9;z-index:10;">
+    <div style="display:flex;align-items:center;justify-content:space-between;"><span class="stage-label" style="color:#5E8A12;">03 · Intelligence</span><span class="h" style="font-size:56px;font-weight:800;color:#DCECB9;">AI</span></div>
+    <div style="margin-top:34px;display:grid;gap:14px;">
+      <div style="height:100px;padding:20px 26px;border-radius:17px;background:#fff;border:1px solid #DCECB9;display:flex;align-items:center;justify-content:space-between;"><b class="h" style="font-size:29px;">Collector</b><span style="font-size:22px;color:#64748B;">Comments</span></div>
+      <div style="height:100px;padding:20px 26px;border-radius:17px;background:#fff;border:1px solid #DCECB9;display:flex;align-items:center;justify-content:space-between;"><b class="h" style="font-size:29px;">ViSoBERT</b><span style="font-size:22px;color:#64748B;">ONNX</span></div>
+      <div style="height:100px;padding:20px 26px;border-radius:17px;background:#fff;border:1px solid #DCECB9;display:flex;align-items:center;justify-content:space-between;"><b class="h" style="font-size:29px;">Aggregator</b><span style="font-size:22px;color:#64748B;">Evidence</span></div>
+    </div>
+  </section>
+
+  <div data-object="true" data-object-type="textbox" data-sequence="4" style="position:absolute;left:400px;top:872px;width:1120px;height:72px;padding:0 28px;border-radius:999px;background:#EBFAFC;border:1px solid #B7E8EF;display:flex;align-items:center;justify-content:center;gap:18px;z-index:10;"><span style="width:14px;height:14px;border-radius:50%;background:#22D3EE;"></span><b class="h" style="font-size:27px;color:#0E8FA6;">Cache hit</b><span style="font-size:25px;color:#4E5A70;">SQLite → Extension → Badge</span></div>
 
   <div data-object="true" data-object-type="shape" style="position:absolute;left:72px;top:996px;width:1776px;height:2px;background:#E3E7F1;z-index:1;"></div>
   <div data-object="true" data-object-type="textbox" class="foot" style="position:absolute;left:72px;top:1014px;width:900px;z-index:10;">FPT School of Business &amp; Technology · VietTubeLens</div>
   <div data-object="true" data-object-type="textbox" class="pg" style="position:absolute;left:1648px;top:1014px;width:200px;z-index:10;">09 / 18</div>
 </div>
-<template data-slide-notes>
-<p><strong>[~60 giây]</strong> Kiến trúc được đọc theo hai lane. Lane violet phía trên là yêu cầu đi từ YouTube qua extension, FastAPI, collector và mô hình ViSoBERT.</p>
-<p>Lane cyan phía dưới là kết quả quay về: mô hình tạo scores và evidence, bộ tổng hợp tạo phản ứng cấp video, kết quả được lưu cache rồi hiển thị thành badge và popover.</p>
-<p><em>[Nhấn giọng]</em> Khi cache hit, hệ thống đi theo đường tắt SQLite → Extension → Badge, không phải thu thập hay suy luận lại.</p>
-<p><strong>Animation cue:</strong> Request được vẽ từ trái sang phải. Sau khi ViSoBERT hoàn tất, result đi xuống lane dưới và chạy ngược từ phải sang trái. Cache hit xuất hiện cuối như một shortcut.</p>
-</template>
-<script src="../assets/slide-runtime.js"></script></body></html>
+<template data-slide-notes><p><strong>[~55 giây]</strong> Kiến trúc được gom thành ba khối. Experience là lớp người dùng nhìn thấy; Service điều phối request và cache; Intelligence thu thập, suy luận và chọn evidence.</p><p>Request đi từ trái sang phải. Response quay lại theo chiều ngược lại. Khi cache hit, hệ thống dùng đường tắt SQLite → Extension → Badge.</p><p><strong>Animation cue:</strong> Ba khối reveal lần lượt. Request chạy trước, response chạy ngược lại, cache shortcut xuất hiện cuối.</p></template>
+<script src="../assets/slide-runtime.js?v=13"></script></body></html>
